@@ -50,6 +50,10 @@ installcheck-local:
 	  echo ; \
 	fi;
 distclean-local:
+	## Note: Output the second test result. The first test result is not output.
+	if test -e ./tests/testsuite.log; then \
+	  cat ./tests/testsuite.log; echo; \
+	fi; \
 	rm -rf ./tests/ja.bats ./tests/coverage
 clean-local:
 	rm -rf ./tests/testsuite ./tests/coverage

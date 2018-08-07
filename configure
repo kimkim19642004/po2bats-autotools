@@ -3480,9 +3480,10 @@ fi
 
 # Check whether --enable-testcode was given.
 if test "${enable_testcode+set}" = set; then :
-  enableval=$enable_testcode;
+  enableval=$enable_testcode; SHCMT=''
+
 else
-  SHCMT=#
+  SHCMT='#'
 
 fi
 

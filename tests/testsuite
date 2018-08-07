@@ -1000,13 +1000,13 @@ case $at_groups in #(
   * ) at_print_banners=false ;;
 esac
 # Text for banner N, set to a single space once printed.
-# Banner 1. testsuite.at:9
+# Banner 1. testsuite.at:10
 # Category starts at test group 1.
 at_banner_text_1="Static Code Analysis"
-# Banner 2. testsuite.at:12
+# Banner 2. testsuite.at:13
 # Category starts at test group 2.
 at_banner_text_2="Functional Test"
-# Banner 3. testsuite.at:47
+# Banner 3. testsuite.at:48
 # Category starts at test group 35.
 at_banner_text_3="Code Coverage"
 
@@ -2088,7 +2088,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_1.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2127,7 +2127,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_2.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 1 2 3 4 5
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 1 2 3 4 5
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2166,7 +2166,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_3.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh -help -version
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh -help -version
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2190,7 +2190,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_3.at:15"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --help2 --version2
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --help2 --version2
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2245,7 +2245,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/test_4.at:12"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --help
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --help
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2288,7 +2288,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/test_5.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --version
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --version
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2328,7 +2328,7 @@ at_fn_check_status 0 $at_status "$at_srcdir/test_6.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msginfo
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msginfo
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2367,7 +2367,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_7.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 1 2
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 1 2
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2391,7 +2391,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_7.at:15"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 1 2 3 4
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 1 2 3 4
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2415,7 +2415,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_7.at:22"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 1 2 --msgdir=''
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 1 2 --msgdir=''
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2453,7 +2453,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_8.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 'a b' "c d" 'e f'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh 'a b' "c d" 'e f'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2491,7 +2491,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_9.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_top_srcdir/po/ja.po" "" ''
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_top_srcdir/po/ja.po" "" ''
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2529,7 +2529,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_10.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_top_srcdir/po/ja.po" ja.bats 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_top_srcdir/po/ja.po" ja.bats 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2567,7 +2567,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_11.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_top_srcdir/po/ja.po" --msgdir=' 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345' ja.bats 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_top_srcdir/po/ja.po" --msgdir=' 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345' ja.bats 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2618,7 +2618,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_12>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_12>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2669,7 +2669,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_13>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_13>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2719,7 +2719,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_14>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_14>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2769,7 +2769,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_15>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_15>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2819,7 +2819,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_16>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_16>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2869,7 +2869,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_17>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_17>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2919,7 +2919,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_18>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_18>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -2969,7 +2969,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_19>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_19>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3019,7 +3019,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_20>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_20>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3067,7 +3067,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_21>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_21>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3177,7 +3177,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_22>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_22>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3227,7 +3227,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_23>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_23>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3265,7 +3265,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_24.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_srcdir/test_24.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_srcdir/test_24.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3303,7 +3303,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_25.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_srcdir/test_25.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_srcdir/test_25.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3353,7 +3353,7 @@ $at_failed && at_fn_log_failure
 $at_traceon; }
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_26>' "$abs_top_srcdir/po/ja.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh --msgdir='<test_26>' "$abs_top_srcdir/po/ja.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3391,7 +3391,7 @@ at_fn_check_status 1 $at_status "$at_srcdir/test_27.at:8"
 if $at_failed; then :
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_srcdir/test_27.po" aaa bbb
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh "$abs_srcdir/test_27.po" aaa bbb
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3442,14 +3442,14 @@ Try the following command: po2bats.sh --help
 at_fn_diff_devnull "$at_stdout" || at_failed=:
 at_fn_check_status 1 $at_status "$at_srcdir/test_28.at:12"
 if $at_failed; then :
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_28>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_28>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_28>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_28>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3500,14 +3500,14 @@ Try the following command: po2bats.sh --help
 at_fn_diff_devnull "$at_stdout" || at_failed=:
 at_fn_check_status 1 $at_status "$at_srcdir/test_29.at:12"
 if $at_failed; then :
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_29>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_29>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_29>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_29>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3558,14 +3558,14 @@ Try the following command: po2bats.sh --help
 at_fn_diff_devnull "$at_stdout" || at_failed=:
 at_fn_check_status 1 $at_status "$at_srcdir/test_30.at:12"
 if $at_failed; then :
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_30>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_30>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_30>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_30>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3616,14 +3616,14 @@ Try the following command: po2bats.sh --help
 at_fn_diff_devnull "$at_stdout" || at_failed=:
 at_fn_check_status 1 $at_status "$at_srcdir/test_31.at:12"
 if $at_failed; then :
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_31>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_31>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_31>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_31>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3674,14 +3674,14 @@ Try the following command: po2bats.sh --help
 at_fn_diff_devnull "$at_stdout" || at_failed=:
 at_fn_check_status 1 $at_status "$at_srcdir/test_32.at:12"
 if $at_failed; then :
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_32>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_32>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_32>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_32>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3732,14 +3732,14 @@ Try the following command: po2bats.sh --help
 at_fn_diff_devnull "$at_stdout" || at_failed=:
 at_fn_check_status 1 $at_status "$at_srcdir/test_33.at:12"
 if $at_failed; then :
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_33>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_33>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
 
 
 else
-  kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_33>'
+  kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh '<test_33>'
 fi
 $at_failed && at_fn_log_failure
 $at_traceon; }
@@ -3761,9 +3761,9 @@ at_xfail=no
 
 
 { set +x
-$as_echo "$at_srcdir/mk_coverage.at:7: kcov --bash-dont-parse-binary-dir --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh"
-at_fn_check_prepare_notrace 'a shell pipeline' "mk_coverage.at:7"
-( $at_check_trace; kcov --bash-dont-parse-binary-dir --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh
+$as_echo "$at_srcdir/mk_coverage.at:7: kcov --bash-parser=\"\$(which bash)\" --bash-dont-parse-binary-dir --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh"
+at_fn_check_prepare_notrace 'a $(...) command substitution' "mk_coverage.at:7"
+( $at_check_trace; kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in ${abs_builddir}/coverage po2bats.sh
 ) >>"$at_stdout" 2>>"$at_stderr" 5>&-
 at_status=$? at_failed=false
 $at_check_filter

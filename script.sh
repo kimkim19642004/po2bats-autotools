@@ -9,22 +9,17 @@ linux )
 		sudo apt install autoconf-archive
 		autoreconf -f -i
 	else
-		# Note: GitHub doesn't manage file timestamps.
-		## It affects the rules described in the 'Makefile' and causes 'make' to fail.
-		## The easiest way to prevent 'make' from failing is to set the timestamps of the following files to the current time:
-		## aclocal.m4 Makefile.in.
+		## Note: The following is required only after the initial 'git clone'.
+		## Match the time-stamp of the following files with the rules described in 'Makefile'.
 		touch aclocal.m4 Makefile.in
 	fi
-
 	# Note: Generate source code with 100% code coverage.
 	./configure --enable-testcode && make
-	make check
-	cat ./tests/testsuite.log
+	make check; cat ./tests/testsuite.log
+	## Note: Test results are output according to the rules of 'make distcheck'.
 	make distcheck
-	cat ./tests/testsuite.log
 	sudo make install
-	make installcheck
-	cat ./tests/testsuite.log ;;
+	make installcheck; cat ./tests/testsuite.log ;;
 osx )
 	MANPATH=$(brew --prefix coreutils)/libexec/gnubin:$MANPATH
 	PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
@@ -39,29 +34,18 @@ osx )
 		brew install autoconf-archive
 		autoreconf -f -i
 	else
-		# Note: GitHub doesn't manage file timestamps.
-		## It affects the rules described in the 'Makefile' and causes 'make' to fail.
-		## The easiest way to prevent 'make' from failing is to set the timestamps of the following files to the current time:
-		## aclocal.m4 Makefile.in.
+		## Note: The following is required only after the initial 'git clone'.
+		## Match the time-stamp of the following files with the rules described in 'Makefile'.
 		touch aclocal.m4 Makefile.in
 	fi
-
 	# Note: Generate source code with 100% code coverage.
 	./configure --enable-testcode && make
-	make check
-	cat ./tests/testsuite.log
+	make check; cat ./tests/testsuite.log
+	## Note: Test results are output according to the rules of 'make distcheck'.
 	make distcheck
-	cat ./tests/testsuite.log
 	sudo make install
-	make installcheck
-	cat ./tests/testsuite.log ;;
+	make installcheck; cat ./tests/testsuite.log ;;
 * )
 	printf '\033[0;31mUnknown value: TRAVIS_OS_NAME=%s\033[0m\n' $TRAVIS_OS_NAME >&2 &&
 	exit 1 ;;
 esac
-
-cat ./src/po2bats.sh
-echo aaaa
-cat ./tests/po2bats.sh
-echo aaaa
-cat $(which po2bats.sh)

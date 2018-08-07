@@ -859,6 +859,9 @@ installcheck-local:
 	  echo ; \
 	fi;
 distclean-local:
+	if test -e ./tests/testsuite.log; then \
+	  cat ./tests/testsuite.log; echo; \
+	fi; \
 	rm -rf ./tests/ja.bats ./tests/coverage
 clean-local:
 	rm -rf ./tests/testsuite ./tests/coverage

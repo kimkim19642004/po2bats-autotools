@@ -104,7 +104,7 @@ VAR_FLAG=no; AC_PATH_PROGS_FEATURE_CHECK(MV_FEATURE, [mv gmv], [
 dnl ### Settings for Code coverage ###
 AC_ARG_ENABLE(testcode,
 	AS_HELP_STRING(--enable-testcode, [Enable embedding test code to help improve code coverage (default is no)]),
-	[AC_SUBST(SHCMT)], [AC_SUBST(SHCMT, @%:@)])
+	[AC_SUBST(SHCMT, '')], [AC_SUBST(SHCMT, '@%:@')])
 
 dnl ### Settings for Autotest ###
 AX_GNU_AUTOTEST

@@ -823,11 +823,11 @@ if [ "${_textdomaindir}" = '<test_23>' ] ; then
 	echo 'abc' > "${_bats_temp_name}"
 	rm -f "${_bats_long_name}"
 fi
-if [ -a "${_bats_temp_name}" ]; then
+if [ -e "${_bats_temp_name}" ]; then
 	## @~Japanese
 	## 簡潔なエラーメッセージを標準エラーに出力します。
 	## @~
-	if [ -a "${_bats_long_name}" ]; then
+	if [ -e "${_bats_long_name}" ]; then
 		## AT_SETUP:test_22
 		_s=$(errno EEXIST)
 		echo "${_org_fname}: $(gettext 'cannot move tempfile to target BATS file'): ${_s#* * }" >&2

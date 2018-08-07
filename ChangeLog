@@ -1,4 +1,4 @@
-2019-03-24  kim  <kimkim19642004@yahoo.co.jp>
+2019-03-26  kim  <kimkim19642004@yahoo.co.jp>
 	* configure.ac: Update file.
 		- Changed notation of revision: from '0.1.2' to '0.1.3'.
 		- Fixed minor description errors.

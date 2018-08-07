@@ -7,6 +7,6 @@ m4_define([__commands__], [po2bats.sh --msgdir='<test_15>' "$abs_top_srcdir/po/j
 
 AT_CHECK(__commands__, 1,,
 [po2bats.sh: BATS tempfile error: Permission denied
-], AT_CHECK(test $at_status -eq 0), kcov --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage __commands__)
+], AT_CHECK(test $at_status -eq 0), kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage __commands__)
 
 AT_CLEANUP

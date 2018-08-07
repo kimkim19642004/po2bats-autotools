@@ -4,6 +4,7 @@ dnl ### Initialization ###
 AT_INIT
 AT_COPYRIGHT(Copyright (c) 2018-2019 kim)
 AT_COLOR_TESTS
+dnl # Note: List the commands for which you want to check the version.
 AT_TESTED(kcov shellcheck)
 
 AT_BANNER(Static Code Analysis)
