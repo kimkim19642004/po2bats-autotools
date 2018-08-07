@@ -81,7 +81,11 @@ The installation procedure of this software is as follows:
 ```
 $ cd $HOME
 $ git clone https://github.com/kimkim19642004/po2bats-autotools.git
+<<<<<<< HEAD
 $ cd po2bats-autotools
+=======
+$ cd po2bats-0.1.0
+>>>>>>> branch 'master' of https://github.com/kimkim19642004/po2bats-autotools
 $ ./configure && make
 $ make check
 $ sudo make install
