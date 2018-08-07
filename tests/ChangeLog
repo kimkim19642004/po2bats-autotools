@@ -1,4 +1,62 @@
-2018-08-06  kim  <kimkim19642004@yahoo.co.jp>
+2019-02-26  kim  <kimkim19642004@yahoo.co.jp>
 
-	* testsuite.at: New file
-	* unit_tests.at: New file
+	* testsuite.at: Update file.
+		- Changed notation of copyrighted year: from '2018' to '2018-2019'.
+		- Add 'test_30.at' to 'Functional Test'.
+		- Add 'test_31.at' to 'Functional Test'.
+		- Add 'test_32.at' to 'Functional Test'.
+		- Add 'test_33.at' to 'Functional Test'.
+	* test_5.at: Update file.
+		- Changed notation of copyrighted year: from '2018' to '2018-2019'.
+	* test_28.at: Update file.
+		- Fixed Checking of the installation status of the GNU getopt command.
+	* test_29.at: Update file.
+		- Fixed Checking of the installation status of the GNU mktemp command.
+	* test_30.at: New file.
+		- Check the installation status of the GNU realpath command.
+	* test_31.at: New file.
+		- Check the installation status of the GNU sha256sum command.
+	* test_32.at: New file.
+		- Check the installation status of the GNU chmod command.
+	* test_33.at: New file.
+		- Check the installation status of the GNU mv command.
+	* test_1.at - test_33.at, mk_coverage.at: Update file.
+		- The option '--bash-dont-parse-binary-dir' has been added to improve the behavior of 'kcov' on GostBSD.
+
+2018-11-03  kim  <kimkim19642004@yahoo.co.jp>
+
+	* testsuite.at: New file.
+	* sh_chk.at: New file.
+	* mk_coverage.at: New file.
+	* test_1.at: New file.
+	* test_2.at: New file.
+	* test_3.at: New file.
+	* test_4.at: New file.
+	* test_5.at: New file.
+	* test_6.at: New file.
+	* test_7.at: New file.
+	* test_8.at: New file.
+	* test_9.at: New file.
+	* test_10.at: New file.
+	* test_11.at: New file.
+	* test_12.at: New file.
+	* test_13.at: New file.
+	* test_14.at: New file.
+	* test_15.at: New file.
+	* test_16.at: New file.
+	* test_17.at: New file.
+	* test_18.at: New file.
+	* test_19.at: New file.
+	* test_20.at: New file.
+	* test_21.at: New file.
+	* test_22.at: New file.
+	* test_23.at: New file.
+	* test_24.at: New file.
+	* test_24.po: New file.
+	* test_25.at: New file.
+	* test_25.po: New file.
+	* test_26.at: New file.
+	* test_27.at: New file.
+	* test_27.po: New file.
+	* test_28.at: New file.
+	* test_29.at: New file.

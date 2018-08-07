@@ -1,0 +1,38 @@
+# Note:
+# - See https://docs.travis-ci.com/ for this file.
+# - This file can be validated with the command 'travis lint path/to/.travis.yml'.
+# - Install 'travis' from https://github.com/travis-ci/travis.rb#lint.
+
+branches:
+  only: master
+
+# Testing environment
+# Ubuntu 16.04 LTS (Travis CI Beta test setting: 2018/10/04)
+# Mac OS X 10.13, Xcode 9.4.1 (Travis CI default setting: 2018/10/04)
+os:
+#  - linux
+  - osx
+#dist: xenial
+sudo: required
+
+language: cpp
+compiler:
+  - g++
+#  - clang++
+env:
+#  - LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=on
+#  - LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=off
+#  - LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=on
+  - LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=off
+
+install: ./install_tools.sh
+script: ./script.sh
+after_success: ./after_success.sh
+
+notifications:
+  email:
+    recipients:
+      - kimkim19642004@yahoo.co.jp
+    on_success: change
+    on_failure: always
+

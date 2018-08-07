@@ -1,4 +1,16 @@
-2018-08-06  kim  <kimkim19642004@yahoo.co.jp>
+2019-02-26  kim  <kimkim19642004@yahoo.co.jp>
 
-	* po2bats.sh.in: New file
-	* Makefile.am: New file
+	* po2bats.sh.in: Update file.
+		- Changed notation of copyrighted year: from '2018' to '2018-2019'.
+		- Add Checking of the installation status of the following GNU commands:
+			- realpath
+			- sha256sum
+			- chmod
+			- mv
+		- The output display of empty msgid changed from '' to '(null)'.
+		- The existence confirmation item of MO file is output to BATS file.
+
+2018-11-03  kim  <kimkim19642004@yahoo.co.jp>
+
+	* po2bats.sh.in: New file.
+	* Makefile.am: New file.
