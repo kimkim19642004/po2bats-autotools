@@ -1,4 +1,39 @@
-2018-08-06  kim  <kimkim19642004@yahoo.co.jp>
+2018-09-18  kim  <kimkim19642004@yahoo.co.jp>
 
 	* testsuite.at: New file
-	* unit_tests.at: New file
+	* ls.at: New file
+	* sh_chk.at: New file
+	* mk_coverage.at: New file
+	* test_1.at: New file
+	* test_2.at: New file
+	* test_3.at: New file
+	* test_4.at: New file
+	* test_5.at: New file
+	* test_6.at: New file
+	* test_7.at: New file
+	* test_8.at: New file
+	* test_9.at: New file
+	* test_10.at: New file
+	* test_11.at: New file
+	* test_12.at: New file
+	* test_13.at: New file
+	* test_14.at: New file
+	* test_15.at: New file
+	* test_16.at: New file
+	* test_17.at: New file
+	* test_18.at: New file
+	* test_19.at: New file
+	* test_20.at: New file
+	* test_21.at: New file
+	* test_22.at: New file
+	* test_23.at: New file
+	* test_24.at: New file
+	* test_24.po: New file
+	* test_25.at: New file
+	* test_25.po: New file
+	* test_26.at: New file
+	* test_27.at: New file
+	* test_27.po: New file
+	* test_28.at: New file
+	* test_29.at: New file
+	

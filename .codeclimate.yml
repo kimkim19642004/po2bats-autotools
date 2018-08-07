@@ -1,0 +1,21 @@
+version: "2"
+plugins:
+  shellcheck:
+    enabled: true
+    checks:
+       SC2005:
+         enabled: false
+       SC2069:
+         enabled: false
+       SC2116:
+         enabled: false
+       SC2181:
+         enabled: false
+exclude_patterns:
+  - "compile"
+  - "install-sh"
+  - "missing"
+  - "install_tools.sh"
+  - "script.sh"
+  - "after_success.sh"
+
