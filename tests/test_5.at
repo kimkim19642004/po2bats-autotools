@@ -1,0 +1,17 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP(test_5)
+AT_KEYWORDS(test_5)
+
+m4_define([__commands__], [po2bats.sh --version])
+
+AT_CHECK(__commands__,,
+[Name: po2bats.sh
+Package: AT_PACKAGE_STRING
+Copyright: Copyright (c) 2018 kim
+License:
+  SPDX-License-Identifier: MIT
+  SPDX-License-List: https://spdx.org/licenses/MIT.html
+],,, kcov --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage __commands__)
+
+AT_CLEANUP
