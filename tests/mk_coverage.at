@@ -1,9 +1,12 @@
 dnl Include this file in 'testsuite.at'.
 
-AT_SETUP(mk_coverage)
-AT_KEYWORDS(mk_coverage)
+AT_SETUP([mk_coverage])
+AT_KEYWORDS([mk_coverage])
+
+m4_define([__commands__], [po2bats.sh])
 
 dnl ### If the '--report-only' option is specified, the collected coverage is reported as 0.0%.
-AT_CHECK(kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage po2bats.sh, 1,, stderr)
+m4_define([__kcov__], [kcov --bash-parser="@S|@(which bash)" --bash-dont-parse-binary-dir --include-pattern='po2bats.sh' --exclude-pattern='po2bats.sh.in' "@S|@{abs_builddir}/coverage"])
+AT_CHECK([__kcov__ __commands__], [1],, [ignore])
 
 AT_CLEANUP

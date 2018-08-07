@@ -1,0 +1,16 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP([test_34])
+AT_KEYWORDS([test_34])
+
+m4_define([__commands__], [po2bats.sh '<test_34>'])
+AT_CHECK([__commands__], [1],,
+[po2bats.sh: called from an unknown or unsupported shell
+Supported shells:
+  GNU Bash 4.0 or higher: https://www.gnu.org/software/bash/
+], [AT_CHECK([test "$at_status" -eq 1])])
+
+m4_define([__kcov__], [kcov --bash-parser="@S|@(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern='po2bats.sh' --exclude-pattern='po2bats.sh.in' "@S|@{abs_builddir}/coverage"])
+AT_CHECK([__kcov__ __commands__], [1],, [ignore])
+
+AT_CLEANUP

@@ -1,0 +1,15 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP([test_9])
+AT_KEYWORDS([test_9])
+
+m4_define([__commands__], [po2bats.sh "$abs_top_srcdir/po/ja.po" "" ''])
+dnl ## Note: 2019-04-03: kim <kimkim19642004@yahoo.co.jp>
+dnl ## 'kcov' is excluded from the first argument of AT_CHECK because there is a problem in controlling the output to 'stdout/stderr' via 'kcov'.
+AT_CHECK([__commands__], [1],,
+[po2bats.sh: BATS error: No such file or directory
+])
+
+@CODE_COVERAGE_ENABLED_TRUE@AT_CHECK([__kcov__ __commands__], [1],, [ignore])
+
+AT_CLEANUP

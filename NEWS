@@ -1,33 +1,57 @@
-2019-03-26
+2019-04-11
 
-	* po2bats 0.1.1: Revision: 0.1.3: Update project.  by kim  <kimkim19642004@yahoo.co.jp>
+	* po2bats 0.2.0: Revision: 0.1.0: Update project.  by kim  <kimkim19642004@yahoo.co.jp>
 		Reason for Update:
-			- Fixed minor description errors.
+			- Clarified [GNU Bash 4.0 or higher](https://www.gnu.org/software/bash/) support.
+			- Conducted code review.
+		Tested locales:
+			- C
+			- ja_JP.UTF-8, ja_JP.utf8
 
 		Tested platforms:
-			Fedora 29:
+			Fedora 28,29:
+				(Note)
+					The following steps have been tested on 'bash' and 'bash -r'.
 				(Step 1) Installing and updating basic software
 					sudo dnf install dnf-plugins-extras-tracer
 					sudo dnf upgrade
-					(If necessary, reboot your system or login again.)
-					
-					sudo dnf install bats moreutils kcov shellcheck
+					(If necessary, restart the specified applications, or reboot your system, or login to your system again.)
+
+					sudo dnf groupinstall "C Development Tools and Libraries"
+					sudo dnf groupinstall "Development Tools"
+					sudo dnf install gettext-devel autoconf-archive
+					sudo dnf install bats moreutils lcov ShellCheck
 				(Step 2) Localization (Example: Japanese)
-					sudo dnf install man-pages-ja
-				(Step 3) Download this software
+					sudo dnf install man-pages-ja glibc-langpack-ja
+					(Don't forget to check the current locale information with the command 'locale'!)
+				(Step 3) Install [kcov](https://github.com/SimonKagstrom/kcov/)
+					cd $HOME
+					git clone https://github.com/SimonKagstrom/kcov.git
+					sudo dnf install elfutils-libelf-devel libcurl-devel binutils-devel elfutils-devel
+					cd kcov
+					mkdir build
+					cd build
+					cmake ..
+					make
+					sudo make install
+				(Step 4) Download this software
 					cd $HOME
 					git clone https://github.com/kimkim19642004/po2bats-autotools.git
-				(Step 4) Normal installation procedure for this software
+				(Step 5) Normal installation procedure for this software
 					cd $HOME/po2bats-autotools
 
 					(The following is required only after the initial 'git clone'.)
 					(Match the timestamps of the following files with the rules described in 'Makefile'.)
-					touch aclocal.m4 Makefile.in
+					touch aclocal.m4
+					touch configure
+					touch Makefile.am
+					touch src/Makefile.am
+					touch Makefile.in
+					touch src/Makefile.in
 
 					./configure && make
 					sudo make install
-				(Step 5) Full installation procedure for this software (If you need to rebuild this software)
-					sudo dnf install autoconf-archive
+				(Step 6) Full installation procedure for this software (If you need to rebuild this software)
 					cd $HOME/po2bats-autotools
 					gettextize -f
 					autoreconf -f -i
@@ -36,153 +60,282 @@
 					make distcheck
 					sudo make install
 					make installcheck
+					sudo make uninstall
+					make clean
+					make distclean
 
 			openSUSE Tumbleweed:
+				(Note)
+					The following steps have been tested on 'bash', 'bash -r',  and 'rbash'.
 				(Step 1) Installing and updating basic software
 					sudo zypper dup
 					sudo zypper inr
 					sudo zypper refresh
 					sudo zypper update
+					sudo zypper ps
+					(If necessary, restart the specified applications, or reboot your system, or login to your system again.)
+					
 					sudo zypper install --type pattern devel_basis
-					sudo zypper install expect
-					sudo zypper install autoconf-archive bats moreutils ShellCheck
-					cd $HOME
-					git clone https://github.com/SimonKagstrom/kcov.git
-					sudo zypper install cmake libcurl-devel libelf-devel libdw-devel
-					cd kcov
-					mkdir build
-				cd build
-				cmake ..
-				make
-				sudo make install
-
-			[GhostBSD 18.12](https://ghostbsd.org/):
-				(Step 1) Specify 'bash' as MATE terminal when installing this distoribution.
-				(Step 2) Installing and updating basic software
-					sudo trueos-update check
-					sudo trueos-update upgrade
-					sudo pkg update
-					sudo pkg upgrade
-					sudo pkg install autotools expect
-					sudo pkg install coreutils autoconf-archive bats-core moreutils hs-ShellCheck
-					git clone https://github.com/SimonKagstrom/kcov.git
-					sudo pkg install binutils cmake elfutils python
-					cd kcov
-					mkdir build
-					cd build
-					cmake ..
-					make
-					sudo make install
-				(Step 3) Create symbolic links to GNU commands with 'g' prefix as follows:
-					sudo ln -s /usr/local/bin/gmktemp /usr/local/bin/mktemp
-					sudo ln -s /usr/local/bin/grealpath /usr/local/bin/realpath
-					sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
-					sudo ln -s /usr/local/bin/gchmod /usr/local/bin/chmod
-					sudo ln -s /usr/local/bin/gmv /usr/local/bin/mv
-				(Step 4) In the file "$HOME/.bashrc", change the PATH environment variable as follows:
-					BATS_ROOT="/usr/local"
-					PATH="/usr/local/bin:/usr/local/sbin:/usr/games:/usr/bin:/usr/sbin:/bin:/sbin"
-					PATH="$BATS_ROOT/libexec/bats-core:$PATH"
-					export BATS_ROOT
-					export PATH
-
-			[Windows Subsystem for Linux] (base on Ubuntu 18.04 LTS) on Windows 10:
-				(Step 1) Installing and updating basic software
-					cd $HOME
-					sudo apt update
-					sudo apt upgrade
-					sudo apt install build-essential cmake python gettext
-					sudo apt install binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
-					sudo apt install autoconf-archive bats moreutils shellcheck
-					git clone https://github.com/SimonKagstrom/kcov/
-					cd kcov
-					mkdir build
-					cd build
-					cmake ..
-					make
-					sudo make install
+					sudo zypper install autoconf-archive
+					sudo zypper install bats moreutils lcov ShellCheck
 				(Step 2) Localization (Example: Japanese)
-					sudo apt install language-pack-ja
-					sudo update-locale LANG=ja_JP.UTF8
-					(Please restart Ubuntu here...)
-					sudo dpkg-reconfigure tzdata
-					sudo apt install manpages-ja manpages-ja-dev
-				(Step 3) Full installation
+					Automatically configured when installing this distribution.
+					(Don't forget to check the current locale information with the command 'locale'!)
+				(Step 3) Install [kcov](https://github.com/SimonKagstrom/kcov/)
+					cd $HOME
+					git clone https://github.com/SimonKagstrom/kcov.git
+					sudo zypper install cmake python libcurl-devel libelf-devel libdw-devel
+					cd kcov
+					mkdir build
+					cd build
+					cmake ..
+					make
+					sudo make install
+				(Step 4) Download this software
 					cd $HOME
 					git clone https://github.com/kimkim19642004/po2bats-autotools.git
-					cd po2bats-autotools
-					sudo dnf install autopoint expect
-					./gettextize.exp
+				(Step 5) Normal installation procedure for this software
+					cd $HOME/po2bats-autotools
+
+					(The following is required only after the initial 'git clone'.)
+					(Match the timestamps of the following files with the rules described in 'Makefile'.)
+					touch aclocal.m4
+					touch configure
+					touch Makefile.am
+					touch src/Makefile.am
+					touch Makefile.in
+					touch src/Makefile.in
+
+					./configure && make
+					sudo make install
+				(Step 6) Full installation procedure for this software (If you need to rebuild this software)
+					cd $HOME/po2bats-autotools
+					gettextize -f
 					autoreconf -f -i
 					./configure && make
 					make check
 					make distcheck
 					sudo make install
 					make installcheck
-				(Step 4) Display coverage measurement result
+					sudo make uninstall
+					make clean
+					make distclean
+
+			[GhostBSD 18.12](https://ghostbsd.org/):
+				(Note)
+					- Specify 'bash' as MATE terminal when installing this distoribution.
+					- If your machine can not connect to DHCP server,
+						check the ip address of 'nameserver' in '/etc/resolv.conf', and
+						try the following commans: ifconfig, dhclient.
+					- You have to install IM (Japanese input system etc.) yourself.
+					- The following steps have been tested on 'bash' and 'csh'.
+				(Step 1) Installing and updating basic software
+					sudo pkg update
+					sudo pkg upgrade
+					(If necessary, restart the specified applications, or reboot your system, or login to your system again.)
+
+					sudo pkg install autotools coreutils autoconf-archive
+					sudo pkg install bats-core moreutils lcov hs-ShellCheck
+				(Step 2) Localization
+					Localized Manpages for 'C and Shell': https://man.cx
+					(Don't forget to check the current locale information with the command 'locale'!)
+				(Step 3) Install [kcov](https://github.com/SimonKagstrom/kcov/)
+					cd $HOME
+					sudo pkg install binutils cmake elfutils python
+					git clone https://github.com/SimonKagstrom/kcov.git
+					cd kcov
+					mkdir build
+					cd build
+					cmake ..
+					make
+					sudo make install
+				(Step 4) Create symbolic links to GNU commands with 'g' prefix as follows:
+					sudo ln -s /usr/local/bin/gmktemp /usr/local/bin/mktemp
+					sudo ln -s /usr/local/bin/grealpath /usr/local/bin/realpath
+					sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+					sudo ln -s /usr/local/bin/gchmod /usr/local/bin/chmod
+					sudo ln -s /usr/local/bin/gmv /usr/local/bin/mv
+				(Step 5) Avoid "configure: error: gcov is needed to do coverage"
+					Example using package 'gcc8':
+						sudo ln -s /usr/local/bin/gcc8 /usr/local/bin/gcc
+						sudo ln -s /usr/local/bin/g++8 /usr/local/bin/g++
+						sudo ln -s /usr/local/bin/gcov8 /usr/local/bin/gcov
+					Example using package 'FreeBSD-clang':
+						Set the following options when running 'configure':
+							./configure --with-gcov='llvm-cov gcov'
+				(Step 6) In the file "$HOME/.bashrc", change the PATH environment variable as follows:
+					BATS_ROOT="/usr/local"
+					PATH="/usr/local/bin:/usr/local/sbin:/usr/games:/usr/bin:/usr/sbin:/bin:/sbin"
+					PATH="$BATS_ROOT/libexec/bats-core:$PATH"
+					export BATS_ROOT
+					export PATH
+				(Step 7) Download this software
+					cd $HOME
+					git clone https://github.com/kimkim19642004/po2bats-autotools.git
+				(Step 8) Normal installation procedure for this software
+					cd $HOME/po2bats-autotools
+
+					(The following is required only after the initial 'git clone'.)
+					(Match the timestamps of the following files with the rules described in 'Makefile'.)
+					touch aclocal.m4
+					touch configure
+					touch Makefile.am
+					touch src/Makefile.am
+					touch Makefile.in
+					touch src/Makefile.in
+
+					./configure && make
+					sudo make install
+				(Step 9) Full installation procedure for this software (If you need to rebuild this software)
+					cd $HOME/po2bats-autotools
+					gettextize -f
+					autoreconf -f -i
+					./configure && make
+					make check
+					make distcheck
+					sudo make install
+					make installcheck
+					sudo make uninstall
+					make clean
+					make distclean
+
+			Ubuntu 16.04,18.04 LTS:
+				(Note)
+					The following steps have been tested on 'bash' and 'dash'.
+				(Step 0) **For Ubuntu 16.04 LTS only**
+					# Note: Avoid the following errors on 'Ubuntu 16.04 LTS'.
+					# configure: error: You must have one of the following versions of lcov: 1.6 1.7 1.8 1.9 1.10 1.11 (found: 1.12).
+					# See [PPA for autotools](http://git.savannah.gnu.org/gitweb/?p=autoconf-archive.git;a=history;f=m4/ax_code_coverage.m4):
+					#	- 2016-12-06 Kevin Locke ax_code_coverage: remove lcov version check.
+					#	- 2015-11-23 Emil Mikulic: Add 1.12 to list of lcov versions.
+					# See [Staging PPA](https://launchpad.net/~ricotz/+archive/ubuntu/staging):
+					#	- autoconf-archive: 20160916-1~16.04~ricotz1
+					sudo apt install software-properties-common
+					sudo add-apt-repository -y ppa:ricotz/staging
+				(Step 1) Installing and updating basic software
+					sudo apt update
+					sudo apt upgrade
+					sudo apt install debian-goodies
+					sudo checkrestart -a
+					(If necessary, restart the specified applications, or reboot your system, or login to your system again.)
+
+					sudo apt install build-essential cmake python gettext autoconf-archive
+					sudo apt install bats moreutils lcov shellcheck
+				(Step 2) Localization (Example: Japanese)
+					sudo apt install manpages-ja manpages-ja-dev
+					(Don't forget to check the current locale information with the command 'locale'!)
+				(Step 3) Install [kcov](https://github.com/SimonKagstrom/kcov/)
+					cd $HOME
+					sudo apt install binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
+					git clone https://github.com/SimonKagstrom/kcov.git
+					cd kcov
+					mkdir build
+					cd build
+					cmake ..
+					make
+					sudo make install
+				(Step 4) Download this software
+					cd $HOME
+					git clone https://github.com/kimkim19642004/po2bats-autotools.git
+				(Step 5) Normal installation procedure for this software
+					cd $HOME/po2bats-autotools
+
+					(The following is required only after the initial 'git clone'.)
+					(Match the timestamps of the following files with the rules described in 'Makefile'.)
+					touch aclocal.m4
+					touch configure
+					touch Makefile.am
+					touch src/Makefile.am
+					touch Makefile.in
+					touch src/Makefile.in
+
+					./configure && make
+					sudo make install
+				(Step 6) Full installation procedure for this software (If you need to rebuild this software)
+					cd $HOME/po2bats-autotools
+					gettextize -f
+					autoreconf -f -i
+					./configure && make
+					make check
+					make distcheck
+					sudo make install
+					make installcheck
+					sudo make uninstall
+					make clean
+					make distclean
+				(Step 7) How to check coverage results on 'Windows Subsystem for Linux (Ubuntu 18.04 LTS) on Windows 10'
 					The easiest way:
 						1. cp -r coverage /mnt/c/Users/<username>/<dir>
 						2. Open file '/mnt/c/Users/<username>/<dir>/coverage/index.html' by 'Microsoft Edge'.
-					How to check the coverage result on the Ubuntu desktop:
+					Use Ubuntu Desktop:
 						1. Install and launch [VcXsrv Windows X Server](https://sourceforge.net/projects/vcxsrv/).
 						2. Add 'export DISPLAY=:0.0' to '.bashrc'.
 						3. Restart 'Ubuntu'.
 						3. sudo apt install lxde (You will have to wait an hour or so...)
 						4. Open 'coverage/index.html' with 'Firefox'.
 
-			[Basix 4.0](http://simosnet.com/livecdroom/) (base on Ubuntu 18.04 LTS):
+			Mac OS X 10.13,10.14 (on [Travis CI](https://travis-ci.com/)):
+				(Note)
+					- If you want to install the development environment on a 'Mac'
+						you just purchased (or reinstall the OS), there are more steps:
+							such as installing: [Homebrew](https://brew.sh/).
+					- Passwordless sudo is available on 'Travis CI'.
+					- The following steps have been tested on 'bash'.
 				(Step 1) Installing and updating basic software
-					sudo apt update
-					sudo apt upgrade
-				(Step 2) Normal installation procedure for this software
+					brew install expect
+					brew install autoconf-archive
+					brew install bats-core
+					brew install moreutils
+					brew install lcov
+					brew install shellcheck
+					brew install gnu-getopt
+				(Step 2) Localization
+					Localized Manpages for 'C and Shell': https://man.cx
+					(Don't forget to check the current locale information with the command 'locale'!)
+				(Step 3) Install [kcov](https://github.com/SimonKagstrom/kcov/)
+					cd $HOME
+					brew install zlib
+					brew install bash
+					brew install cmake (Not required for 'Travis CI')
+					brew install pkgconfig
+					git clone https://github.com/SimonKagstrom/kcov.git
+					cd kcov
+					mkdir build
+					cd build
+					cmake ..
+					make
+					make install
+				(Step 4) Download this software
 					cd $HOME
 					git clone https://github.com/kimkim19642004/po2bats-autotools.git
-				sudo apt install autoconf-archive bats moreutils kcov shellcheck
-				(Note 1)
-					If there is any problem with the package installed by the command 'sudo apt install kcov',
-					try installing 'kcov' from https://github.com/SimonKagstrom/kcov/.
-					In that case also run the following command: sudo apt install build-essential cmake
-				(Note 2)
-					Since the versions of 'automake' is old,
-					reconfigure this build system before execute the command './ configure && make'.
-					Execute as follows:
-						sudo apt install autopoint expect
-						./gettextize.exp
-						autoreconf -f -i
-						./ configure && make
-				(URL)
-					http://simosnet.com/livecdroom/Ubuntu 18.04 LTS)
+				(Step 5) Set environment variable: PATH
+					PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+					PATH=$(brew --prefix gettext)/bin:$PATH
+					PATH=$(brew --prefix gnu-getopt)/bin:$PATH
+					export PATH
+				(Step 6) Normal installation procedure for this software
+					cd $HOME/po2bats-autotools
 
-			Ubuntu 16.04 LTS (on Travis CI):
-				sudo apt update
-				sudo apt upgrade (This process is time consuming and is not recommended on Travis CI.)
-				sudo apt install autoconf-archive bats moreutils kcov shellcheck
-				(Note 1)
-					If there is any problem with the package installed by the command 'sudo apt install kcov',
-					try installing 'kcov' from https://github.com/SimonKagstrom/kcov/.
-				(Note 2)
-					Since the versions of 'automake' and 'gettext' are old,
-					reconfigure this build system before execute the command './ configure && make'.
-					Execute as follows:
-						sudo apt install autopoint expect
-						./gettextize.exp
-						autoreconf -f -i
-						./ configure && make
-				(URL)
-					https://travis-ci.com/kimkim19642004/po2bats-autotools
+					(The following is required only after the initial 'git clone'.)
+					(Match the timestamps of the following files with the rules described in 'Makefile'.)
+					touch aclocal.m4
+					touch configure
+					touch Makefile.am
+					touch src/Makefile.am
+					touch Makefile.in
+					touch src/Makefile.in
 
-			Mac OS X 10.13, Xcode 9.4.1 (on Travis CI):
-				brew upgrade (This process is time consuming and is not recommended on Travis CI.)
-				brew install autoconf-archive bats-core moreutils kcov shellcheck gnu-getopt
-				brew link --force gettext
-				export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
-				export MANPATH=$(brew --prefix coreutils)/libexec/gnubin:$MANPATH
-				export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-				(Note 1)
-					If there is any problem with the package installed by the command 'brew install kcov',
-					try installing 'kcov' from https://github.com/SimonKagstrom/kcov/.
-				(Note 2)
-					 Refused command (Old command): brew link --force gnu-getopt
-					 Alternate command: export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-				(URL)
-					https://travis-ci.com/kimkim19642004/po2bats-autotools
+					./configure && make
+					make install
+				(Step 7) Full installation procedure for this software (If you need to rebuild this software)
+					cd $HOME/po2bats-autotools
+					gettextize -f
+					autoreconf -f -i
+					./configure && make
+					make check
+					make distcheck
+					sudo make install
+					make installcheck
+					sudo make uninstall
+					make clean
+					make distclean

@@ -2,4 +2,4 @@
 
 set timeout -1
 spawn gettextize -f
-expect "Press Return to acknowledge the previous *" { send "\r" }
+expect "Press Return to acknowledge the previous *" { send '\r' }

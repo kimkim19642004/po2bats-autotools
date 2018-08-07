@@ -108,6 +108,14 @@ When the latest version of [Fedora](https://getfedora.org/) is clean installed:
 ```
 $ sudo dnf install dnf-plugins-extras-tracer
 $ sudo dnf upgrade
+$ sudo dnf groupinstall "C Development Tools and Libraries"
+$ sudo dnf groupinstall "Development Tools"
+$ sudo dnf install gettext-devel autoconf-archive
+$ sudo dnf install bats moreutils kcov lcov ShellCheck
+
+(Let's also install the language pack! Example in Japanese locale:)
+$ sudo dnf install man-pages-ja glibc-langpack-ja
+(Don't forget to check the current locale information with the command 'locale'!)
 ```
 Follow instructions of the DNF command, restart the specified applications, or reboot your system, or login to your system again.
 
@@ -121,11 +129,15 @@ Note:
 $ cd $HOME
 $ git clone https://github.com/kimkim19642004/po2bats-autotools.git
 $ cd po2bats-autotools
-$ sudo dnf install bats moreutils kcov shellcheck
 
 (The following is required only after the initial 'git clone'.)
 (Match the timestamps of the following files with the rules described in 'Makefile'.)
-$ touch aclocal.m4 Makefile.in
+$ touch aclocal.m4
+$ touch configure
+$ touch Makefile.am
+$ touch src/Makefile.am
+$ touch Makefile.in
+$ touch src/Makefile.in
 
 $ ./configure && make
 $ sudo make install
@@ -136,10 +148,10 @@ $ sudo make install
 $ cd $HOME
 $ git clone https://github.com/kimkim19642004/po2bats-autotools.git
 $ cd po2bats-autotools
+
 $ gettextize -f
-$ sudo dnf install autoconf-archive
 $ autoreconf -f -i
-$ sudo dnf install bats moreutils kcov shellcheck
+
 $ ./configure && make
 $ make check
 $ make distcheck
@@ -148,10 +160,10 @@ $ make installcheck
 ```
 
 Note:
-- You can generate source files with 100% code coverage by executing the command './configure --enable-testcode'.
+- You can generate source files with 100% code coverage by executing the command **'./configure --enable-code-coverage --enable-testcode'**.
 - Open the file '$HOME/po2bats-autotools/tests/coverage/index.html' in your web browser and see the code coverage.
-- See 'INSTALL' for more information.
-- See 'NEWS' for troubleshooting about installation.
+- See **'NEWS'** for installation on other operating systems.
+- Please read **'INSTALL'** carefully.
 
 ## Support Eclipse
 

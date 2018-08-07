@@ -36,7 +36,7 @@
 <flagvalue id="cflags-gprof" value="false"/>
 <flagvalue id="cflags-gcov" value="false"/>
 </flag>
-<option id="user" value="--enable-testcode"/>
+<option id="user" value="--enable-code-coverage --enable-testcode"/>
 <option id="autogen" value="autogen.sh"/>
 <option id="autogenOpts" value=""/>
 </configuration>
@@ -76,7 +76,7 @@
 <flagvalue id="cflags-gprof" value="false"/>
 <flagvalue id="cflags-gcov" value="false"/>
 </flag>
-<option id="user" value="CFLAGS=&apos;-g -O0&apos; CXXFLAGS=&apos;-g -O0&apos; --enable-testcode"/>
+<option id="user" value="CFLAGS=&apos;-g -O0&apos; CXXFLAGS=&apos;-g -O0&apos; --enable-code-coverage --enable-testcode"/>
 <option id="autogen" value="autogen.sh"/>
 <option id="autogenOpts" value=""/>
 </configuration>
