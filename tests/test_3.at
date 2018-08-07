@@ -1,0 +1,20 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP(test_3)
+AT_KEYWORDS(test_3)
+
+m4_define([__commands__], [po2bats.sh -help -version])
+
+AT_CHECK(__commands__, 1,,
+[po2bats.sh: Invalid argument
+Try the following command: po2bats.sh --help
+],, kcov --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage __commands__)
+
+m4_define([__commands__], [po2bats.sh --help2 --version2])
+
+AT_CHECK(__commands__, 1,,
+[po2bats.sh: Invalid argument
+Try the following command: po2bats.sh --help
+],, kcov --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage __commands__)
+
+AT_CLEANUP

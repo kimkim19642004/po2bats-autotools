@@ -1,0 +1,1 @@
+../src/po2bats.sh

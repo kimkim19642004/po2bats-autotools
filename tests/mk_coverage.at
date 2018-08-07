@@ -1,0 +1,9 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP(mk_coverage)
+AT_KEYWORDS(mk_coverage)
+
+dnl ### If the '--report-only' option is specified, the collected coverage is reported as 0.0%.
+AT_CHECK(kcov --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage po2bats.sh, 1,, stderr)
+
+AT_CLEANUP
