@@ -77,9 +77,9 @@ testsuite: atconfig:
 ## ------------------ ##
 ## Running the tests. ##
 ## ------------------ ##
-testsuite: starting at: Tue Aug  7 14:50:07 JST 2018
-1. unit_tests (unit_tests.at:3): ok     (0m0.021s 0m0.037s)
-testsuite: ending at: Tue Aug  7 14:50:07 JST 2018
+testsuite: starting at: Tue Aug  7 17:08:08 JST 2018
+1. unit_tests (unit_tests.at:3): ok     (0m0.027s 0m0.031s)
+testsuite: ending at: Tue Aug  7 17:08:08 JST 2018
 testsuite: test suite duration: 0h 0m 0s
 
 ## ------------- ##
