@@ -1,0 +1,3 @@
+# User-defined variables
+
+abs_localedir=@prefix@/share/locale

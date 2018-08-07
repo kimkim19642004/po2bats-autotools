@@ -1,15 +1,53 @@
-2018-08-06  gettextize  <bug-gnu-gettext@gnu.org>
+2019-03-01  kim  <kimkim19642004@yahoo.co.jp>
+	* configure.ac: Update file.
+		- Changed notation of revision: from '0.1.1' to '0.1.2'.
+	* NEWS: Update file.
+		- Project update announcement
+		- Add to Tested platforms:
+			- [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about)
 
-	* Makefile.am (SUBDIRS): Add po.
-	(ACLOCAL_AMFLAGS): New variable.
-	(EXTRA_DIST): New variable.
-	* configure.ac (AC_CONFIG_FILES): Add po/Makefile.in.
+2019-02-26  kim  <kimkim19642004@yahoo.co.jp>
 
-2018-08-06  kim  <kimkim19642004@yahoo.co.jp>
+	* configure.ac: Update file.
+		- Changed notation of copyrighted year: from '2018' to '2018-2019'.
+		- Changed notation of version: from '0.1.0' to '0.1.1'.
+		- Add Checking of the installation status of the following GNU commands (with the prefix 'g'):
+			- gmktemp
+			- realpath, grealpath
+			- sha256sum, gsha256sum
+			- chmod, gchmod
+			- mv, gmv
+	* COPYING: Update file.
+		- Changed notation of copyrighted year: from '2018' to '2018-2019'.
+	* Makefile.am: Update file.
+		- Add 'test_30.at' to 'EXTRA_DIST'.
+		- Add 'test_31.at' to 'EXTRA_DIST'.
+		- Add 'test_32.at' to 'EXTRA_DIST'.
+		- Add 'test_33.at' to 'EXTRA_DIST'.
+		- Fixed some code to support GhostBSD.
+	* NEWS: Update file.
+		- Project update announcement
+		- Add to Tested platforms:
+			- [openSUSE](https://www.opensuse.org/)
+			- [GhostBSD](https://ghostbsd.org/)
+			- [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about)
+	* README: Update file.
+		- Fixed the execution result example of './ja.bats'.
 
-	* AUTHORS: New file
-	* configure.ac: New file
-	* COPYING: New file
-	* Makefile.am: New file
-	* NEWS: New file
-	* README: New file
+2018-11-03  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am
+		(SUBDIRS): Add po.
+		(ACLOCAL_AMFLAGS): New variable.
+		(EXTRA_DIST): New variable.
+	* configure.ac
+		(AC_CONFIG_FILES): Add po/Makefile.in.
+
+2018-11-03  kim  <kimkim19642004@yahoo.co.jp>
+
+	* AUTHORS: New file.
+	* configure.ac: New file.
+	* COPYING: New file.
+	* Makefile.am: New file.
+	* NEWS: New file.
+	* README: New file.
