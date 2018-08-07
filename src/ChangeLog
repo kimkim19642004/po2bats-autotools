@@ -1,3 +1,9 @@
+2019-04-10  kim  <kimkim19642004@yahoo.co.jp>
+
+	* po2bats.sh.in: Update file.
+		- Clarified [GNU Bash 4.0 or higher](https://www.gnu.org/software/bash/) support.
+		- Conducted code review.
+
 2019-02-26  kim  <kimkim19642004@yahoo.co.jp>
 
 	* po2bats.sh.in: Update file.

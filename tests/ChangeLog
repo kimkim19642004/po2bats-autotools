@@ -1,5 +1,19 @@
-2019-02-26  kim  <kimkim19642004@yahoo.co.jp>
+2019-04-10  kim  <kimkim19642004@yahoo.co.jp>
+	* atlocal.in: Update file.
+		- Conducted code review.
+	* mk_coverage.at: Update file.
+		- Conducted code review.
+	* sh_chk.at: Update file.
+		- removed the option '-e'.
+		- Conducted code review.
+	* test_[1..35].at.in: New file.
+		- Renamed 'test_[1..34].at' to 'test_[1..34].at.in'.
+		- Conducted code review.
+	* testsuite.at.in: New file.
+		- Renamed 'testsuite.at' to 'testsuite.at.in'.
+		- Conducted code review.
 
+2019-02-26  kim  <kimkim19642004@yahoo.co.jp>
 	* testsuite.at: Update file.
 		- Changed notation of copyrighted year: from '2018' to '2018-2019'.
 		- Add 'test_30.at' to 'Functional Test'.

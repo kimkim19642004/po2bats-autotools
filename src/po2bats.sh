@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 ## @~Japanese
 ## @file po2bats.sh
 ## @brief BATS ファイル生成スクリプト
@@ -25,55 +24,6 @@
 ## @~
 
 ## @~Japanese
-## プログラム終了時に自動的に呼び出される関数を登録します。
-## @attention
-## - 翻訳されたメッセージのチェックサム（メッセージ・ダイジェスト）生成処理で使用されるテンポラリー・ファイルは、まだ作成されていません。_chksum_temp_err に 0 以外の値を初期値として設定します。
-## - BATS テンポラリー・ファイルは、まだ作成されていません。 _bats_temp_err に 0 以外の値を初期値として設定します。
-## - declare readonly など、変数宣言をしないようにしてください。コマンドの組み合わせによっては、エラーの発生を見過す可能性が高いです。
-## @~
-_chksum_temp_err=1
-_bats_temp_err=1
-function __atexit() {
-	## @~Japanese
-	## 翻訳されたメッセージのチェックサム（メッセージ・ダイジェスト）生成処理で使用されるテンポラリー・ファイルを削除します。
-	## @attention
-	## - 空白文字を含む文字列を正しく展開できるように、${_chksum_temp_name} をダブルコーテーションで必ず囲むようにしてください。
-	## - rm コマンドに複数ファイル名を指定して、コマンド呼び出しに関するオーバーヘッド（呼び出し回数など）を減らすことを検討しましたが、結果、不採用としました。
-	## @~
-	if [ ${_chksum_temp_err} -eq 0 ] ; then
-		rm -f "${_chksum_temp_name}"
-	fi
-
-	## @~Japanese
-	## BATS テンポラリー・ファイルを削除します。
-	## @attention
-	## - 空白文字を含む文字列を正しく展開できるように、${_bats_temp_name} をダブルコーテーションで必ず囲むようにしてください。
-	## - rm コマンドに複数ファイル名を指定して、コマンド呼び出しに関するオーバーヘッド（呼び出し回数など）を減らすことを検討しましたが、結果、不採用としました。
-	## @~
-	if [ ${_bats_temp_err} -eq 0 ] ; then
-		rm -f "${_bats_temp_name}"
-	fi
-}
-## @~Japanese
-## 本プログラムで一番最初に実行されるべきコマンド。他のすべての処理は、このコマンドの呼び出し以降に行うようにしてください。
-## @~
-trap __atexit EXIT
-
-## @~Japanese
-## 本プログラムのメッセージカタログのための環境変数を設定します。
-## @attention
-## - TEXTDOMAINDIR が空の場合は、メッセージカタログの標準の検索ディレクトリー（Fedora では /usr/share/locale）下の po2bats.mo が参照されます。
-## - このファイルを GNU Autotools で作成したインストーラーに組み込む場合は、ファイル名を po2bats.sh.in とし、インストーラーが自動的に TEXTDOMAINDIR と TEXTDOMAIN に値を設定できるようにしてください。
-## @~
-export TEXTDOMAINDIR='/usr/local/share/locale' TEXTDOMAIN='po2bats'
-
-## @~Japanese
-## このプログラム内において、GNU スタイルの getopt コマンドを通常モード（非完全 POSIX モード）で使用できるように設定してします。
-## @attention Mac OSX や BSD 系の OS を使用している場合は、GNU スタイルの getopt コマンドをインストールしてください。
-## @~
-unset POSIXLY_CORRECT GETOPT_COMPATIBLE
-
-## @~Japanese
 ## @brief プログラムのオリジナル名
 ## @details
 ## - この変数には、プログラムのオリジナル・ファイル名を設定してください。
@@ -88,13 +38,109 @@ unset POSIXLY_CORRECT GETOPT_COMPATIBLE
 _org_fname='po2bats.sh'
 
 ## @~Japanese
+## 本プログラムのメッセージカタログのための環境変数を設定します。
+## @attention
+## - TEXTDOMAINDIR が空の場合は、メッセージカタログの標準の検索ディレクトリー（Fedora では /usr/share/locale）下の po2bats.mo が参照されます。
+## - このファイルを GNU Autotools で作成したインストーラーに組み込む場合は、ファイル名を po2bats.sh.in とし、インストーラーが自動的に TEXTDOMAINDIR と TEXTDOMAIN に値を設定できるようにしてください。
+## @~
+export TEXTDOMAINDIR='/usr/local/share/locale' TEXTDOMAIN='po2bats'
+
+## @~Japanese
+## - プログラムの設計や保守管理の都合上、メジャー・バージョン番号の桁数が 1〜3 以外ならプログラムを中止する。
+## - プログラムの設計や保守管理の都合上、メジャー・バージョン番号が 4〜999 以外ならプログラムを中止する。 
+## @attention
+## - 不明またはサポート外のシェルからの呼び出しを検出したいので、構文解析エラーが発生しないよう、POSIX に準拠してコーディングしてください。
+## - 以下のチェックは簡易的なものです。シェル変数 BASH_VERSINFO の偽装チェックや、シェルの正当性チェックなどの、本格的なセキュリティチェックについては、このプログラムの呼び出し側で行ってください。
+## - [dash](http://gondor.apana.org.au/~herbert/dash/) は ${BASH_VERSINFO[0]} に関する構文エラー 'Bad substitution' を表示し、それ以降のスクリプトの解釈、実行を中止します。
+## - ${_i} の値が整数の範囲を超えていたり文字列である場合は、[ "${_i}" -gt 3 ] のところで構文エラーとなりますが、本プログラムでは、そのエラー表示を抑制しています。
+## - _i の値をクリアし、_i=${BASH_VERSINFO[0]} に失敗した場合でも確実に 0 がセットされているようにしました。
+## @~
+_i=0; _i=${BASH_VERSINFO[0]}
+if [ "$1" = '<test_34>' ] ; then
+	_i='123abc'
+fi
+## @~Japanese
+# 標準出力と標準エラー出力を捨てる。
+# @attention このスクリプトのパーサーを rbash（または 'bash -r'）にした場合、/dev/null 出力が禁止されている旨のエラーが表示された。回避策としてバッファーに捨てることにした。
+## @~
+if ! _s=$( ((_i>3)) 2>&1 ) ; then
+	{
+		## AT_SETUP:test_34
+		echo "${_org_fname}: $(gettext 'called from an unknown or unsupported shell')"
+		echo 'Supported shells:'
+		echo '  GNU Bash 4.0 or higher: https://www.gnu.org/software/bash/'
+	} >&2; exit 1
+fi
+
+## @~Japanese
+# 呼出側シェルのオプションを検証します。
+# @attention
+# - このスクリプトのパーサーを rbash（または 'bash -r'）にした場合、/dev/null 出力が禁止されている旨のエラーが表示された。回避策としてバッファーに捨てることにした。
+# - 'shopt restricted_shell' の戻り値は常に 1 であるため、実行エラーの検出に使えません。
+# - 'kcov' では 'rbash' や 'bash -r' を使ったテストができません。
+## @~
+_s=$(shopt restricted_shell 2>&1)
+if [ "$1" = '<test_35>' ] ; then
+	_s=''
+fi
+if [ "${_s#restricted_shell$'\t'}" != 'off' ] ; then
+	{
+		## AT_SETUP:test_35
+		echo "${_org_fname}: $(gettext 'Unsupported Shell Options')"
+		echo "  ${_s}"
+		gettext 'See'; echo ': https://www.gnu.org/software/bash/manual/bash.html'
+	} >&2; exit 1
+fi
+
+## @~Japanese
+## プログラム終了時に自動的に呼び出される関数を登録します。
+## @attention
+## - 翻訳されたメッセージのチェックサム（メッセージ・ダイジェスト）生成処理で使用されるテンポラリー・ファイルは、まだ作成されていません。_chksum_temp_err に 0 以外の値を初期値として設定します。
+## - BATS テンポラリー・ファイルは、まだ作成されていません。 _bats_temp_err に 0 以外の値を初期値として設定します。
+## - declare readonly など、変数宣言をしないようにしてください。コマンドの組み合わせによっては、エラーの発生を見過す可能性が高いです。
+## @~
+_chksum_temp_err=1
+_bats_temp_err=1
+__atexit() {
+	## @~Japanese
+	## 翻訳されたメッセージのチェックサム（メッセージ・ダイジェスト）生成処理で使用されるテンポラリー・ファイルを削除します。
+	## @attention
+	## - 空白文字を含む文字列を正しく展開できるように、${_chksum_temp_name} をダブルコーテーションで必ず囲むようにしてください。
+	## - rm コマンドに複数ファイル名を指定して、コマンド呼び出しに関するオーバーヘッド（呼び出し回数など）を減らすことを検討しましたが、結果、不採用としました。
+	## @~
+	if ((_chksum_temp_err==0)) ; then
+		rm -f "${_chksum_temp_name}"
+	fi
+
+	## @~Japanese
+	## BATS テンポラリー・ファイルを削除します。
+	## @attention
+	## - 空白文字を含む文字列を正しく展開できるように、${_bats_temp_name} をダブルコーテーションで必ず囲むようにしてください。
+	## - rm コマンドに複数ファイル名を指定して、コマンド呼び出しに関するオーバーヘッド（呼び出し回数など）を減らすことを検討しましたが、結果、不採用としました。
+	## @~
+	if ((_bats_temp_err==0)) ; then
+		rm -f "${_bats_temp_name}"
+	fi
+}
+## @~Japanese
+## Ctrl-C 押下時や、本プログラムの終了時に自動的に呼ばれる処理を登録します。
+## @~
+trap __atexit EXIT
+
+## @~Japanese
+## このプログラム内において、GNU スタイルの getopt コマンドを通常モード（非完全 POSIX モード）で使用できるように設定してします。
+## @attention Mac OSX や BSD 系の OS を使用している場合は、GNU スタイルの getopt コマンドをインストールしてください。
+## @~
+unset POSIXLY_CORRECT GETOPT_COMPATIBLE
+
+## @~Japanese
 ## @brief ヘルプ表示関数
 ## @details ヘルプを標準出力に出力後、終了ステータス 0 でプログラムを終了します。
 ## @attention
 ## - ヘルプからの情報漏洩に注意してください。
 ## - このファイルを GNU Autotools で作成したインストーラーに組み込む場合は、ファイル名を po2bats.sh.in とし、インストーラーが自動的に URL、バグの報告先などの値を設定できるようにしてください。
 ## @~
-function __help() {
+__help() {
 	## @~Japanese
 	## - 制御コードに対するセキュリティを強化（制御コードを解釈しないように）しています。
 	## - 出力レイアウトをイメージしやすいようにコーディングしています。
@@ -106,9 +152,9 @@ function __help() {
 	## - 長いオプションは最長 8 文字までとする。
 	## @~
 	echo "$(gettext 'Usage'): ${_org_fname} [$(gettext 'OPTION')] PO BATS TEXTDOMAIN"
-	echo "$(gettext 'Generate BATS file from PO file')"
+	gettext 'Generate BATS file from PO file'; echo ''
 	echo ''
-	echo "$(gettext 'OPTION'):"
+	gettext 'OPTION'; echo ':'
 	echo "      --msgdir=TEXTDOMAINDIR  $(gettext 'Specify message catalog search path')"
 	echo "      --msginfo               $(gettext 'Display message catalog information and exit')"
 	echo "      --help                  $(gettext 'Display this help and exit')"
@@ -120,7 +166,7 @@ function __help() {
 	echo "  $(gettext 'See gettext command help for more information'): gettext --help"
 	echo ''
 	echo "URL: https://github.com/kimkim19642004/po2bats-autotools"
-	echo "$(gettext 'Report bugs to'): https://github.com/kimkim19642004/po2bats-autotools/issues"
+	gettext 'Report bugs to'; echo ': https://github.com/kimkim19642004/po2bats-autotools/issues'
 	exit 0
 }
 
@@ -131,18 +177,20 @@ function __help() {
 ## - バージョン情報からの情報漏洩に注意してください。
 ## - このファイルを GNU Autotools で作成したインストーラーに組み込む場合は、ファイル名を po2bats.sh.in とし、インストーラーが自動的にパッケージ文字列、著作権などの値を設定できるようにしてください。
 ## @~
-function __version() {
+__version() {
 	## @~Japanese
 	## - 制御コードに対するセキュリティを強化（制御コードを解釈しないように）しています。
 	## - 出力レイアウトをイメージしやすいようにコーディングしています。
 	## - コマンドの呼び出し回数を減らして処理速度を上げるよりも、セキュリティ強化を重視しています。
 	## @~
 	echo "Name: ${_org_fname}"
-	echo 'Package: po2bats 0.1.1'
+	echo 'Package: po2bats 0.2.0'
 	echo 'Copyright: Copyright (c) 2018-2019 kim'
 	echo 'License:'
 	echo '  SPDX-License-Identifier: MIT'
 	echo '  SPDX-License-List: https://spdx.org/licenses/MIT.html'
+	echo 'Supported shells:'
+	echo '  GNU Bash 4.0 or higher: https://www.gnu.org/software/bash/'
 	exit 0
 }
 
@@ -151,7 +199,7 @@ function __version() {
 ## @details メッセージカタログ情報を標準出力に出力後、終了ステータス 0 でプログラムを終了します。
 ## @attention メッセージカタログ情報からの情報漏洩に注意してください。
 ## @~
-function __msginfo() {
+__msginfo() {
 	## @~Japanese
 	## - 制御コードに対するセキュリティを強化（制御コードを解釈しないように）しています。
 	## - 出力レイアウトをイメージしやすいようにコーディングしています。
@@ -170,12 +218,16 @@ function __msginfo() {
 if [ "$1" = '<test_28>' ] ; then
 	export GETOPT_COMPATIBLE='yes'
 fi
-getopt --test >/dev/null 2>&1 # 標準出力と標準エラー出力を捨てる。
-if [ $? -ne 4 ] ; then
+## @~Japanese
+# 標準出力と標準エラー出力を捨てる。
+# @attention このスクリプトのパーサーを rbash（または 'bash -r'）にした場合、/dev/null 出力が禁止されている旨のエラーが表示された。回避策としてバッファーに捨てることにした。
+## @~
+_s=$(getopt --test 2>&1); _i=$?
+if ((_i != 4)) ; then
 	{
 		## AT_SETUP:test_28
 		echo "${_org_fname}: getopt: $(gettext 'This GNU command is not installed, or invalid path/link settings.')"
-		echo "$(gettext 'See'): https://man.cx/getopt(1)"
+		gettext 'See'; echo ': https://man.cx/getopt(1)'
 	} >&2; exit 1
 fi
 
@@ -187,12 +239,15 @@ MKTEMP='mktemp'
 if [ "$1" = '<test_29>' ] ; then
 	MKTEMP='mktemp_test'
 fi
-$MKTEMP --version >/dev/null 2>&1 # 標準出力と標準エラー出力を捨てる。
-if [ $? -ne 0 ] ; then
+## @~Japanese
+# 標準出力と標準エラー出力を捨てる。
+# @attention このスクリプトのパーサーを rbash（または 'bash -r'）にした場合、/dev/null 出力が禁止されている旨のエラーが表示された。回避策としてバッファーに捨てることにした。
+## @~
+if ! _s=$($MKTEMP --version 2>&1) ; then
 	{
 		## AT_SETUP:test_29
 		echo "${_org_fname}: mktemp: $(gettext 'This GNU command is not installed, or invalid path/link settings.')"
-		echo "$(gettext 'See'): https://man.cx/mktemp(1)"
+		gettext 'See'; echo ': https://man.cx/mktemp(1)'
 	} >&2; exit 1
 fi
 
@@ -204,12 +259,15 @@ REALPATH='realpath'
 if [ "$1" = '<test_30>' ] ; then
 	REALPATH='realpath_test'
 fi
-$REALPATH --version >/dev/null 2>&1 # 標準出力と標準エラー出力を捨てる。
-if [ $? -ne 0 ] ; then
+## @~Japanese
+# 標準出力と標準エラー出力を捨てる。
+# @attention このスクリプトのパーサーを rbash（または 'bash -r'）にした場合、/dev/null 出力が禁止されている旨のエラーが表示された。回避策としてバッファーに捨てることにした。
+## @~
+if ! _s=$($REALPATH --version 2>&1) ; then
 	{
 		## AT_SETUP:test_30
 		echo "${_org_fname}: realpath: $(gettext 'This GNU command is not installed, or invalid path/link settings.')"
-		echo "$(gettext 'See'): https://man.cx/realpath(1)"
+		gettext 'See'; echo ': https://man.cx/realpath(1)'
 	} >&2; exit 1
 fi
 
@@ -221,12 +279,16 @@ SHA256SUM='sha256sum'
 if [ "$1" = '<test_31>' ] ; then
 	SHA256SUM='sha256sum_test'
 fi
-$SHA256SUM --version >/dev/null 2>&1 # 標準出力と標準エラー出力を捨てる。
-if [ $? -ne 0 ] ; then
+## @~Japanese
+# 標準出力と標準エラー出力を捨てる。
+# @attention このスクリプトのパーサーを rbash（または 'bash -r'）にした場合、/dev/null 出力が禁止されている旨のエラーが表示された。回避策としてバッファーに捨てることにした。
+## @~
+
+if ! _s=$($SHA256SUM --version 2>&1) ; then
 	{
 		## AT_SETUP:test_31
 		echo "${_org_fname}: sha256sum: $(gettext 'This GNU command is not installed, or invalid path/link settings.')"
-		echo "$(gettext 'See'): https://man.cx/sha256sum(1)"
+		gettext 'See'; echo ': https://man.cx/sha256sum(1)'
 	} >&2; exit 1
 fi
 
@@ -238,12 +300,16 @@ CHMOD='chmod'
 if [ "$1" = '<test_32>' ] ; then
 	CHMOD='chmod_test'
 fi
-$CHMOD --version >/dev/null 2>&1 # 標準出力と標準エラー出力を捨てる。
-if [ $? -ne 0 ] ; then
+## @~Japanese
+# 標準出力と標準エラー出力を捨てる。
+# @attention このスクリプトのパーサーを rbash（または 'bash -r'）にした場合、/dev/null 出力が禁止されている旨のエラーが表示された。回避策としてバッファーに捨てることにした。
+## @~
+
+if ! _s=$($CHMOD --version 2>&1) ; then
 	{
 		## AT_SETUP:test_32
 		echo "${_org_fname}: chmod: $(gettext 'This GNU command is not installed, or invalid path/link settings.')"
-		echo "$(gettext 'See'): https://man.cx/chmod(1)"
+		gettext 'See'; echo ': https://man.cx/chmod(1)'
 	} >&2; exit 1
 fi
 
@@ -255,20 +321,27 @@ MV='mv'
 if [ "$1" = '<test_33>' ] ; then
 	MV='mv_test'
 fi
-$MV --version >/dev/null 2>&1 # 標準出力と標準エラー出力を捨てる。
-if [ $? -ne 0 ] ; then
+## @~Japanese
+# 標準出力と標準エラー出力を捨てる。
+# @attention このスクリプトのパーサーを rbash（または 'bash -r'）にした場合、/dev/null 出力が禁止されている旨のエラーが表示された。回避策としてバッファーに捨てることにした。
+## @~
+
+if ! _s=$($MV --version 2>&1) ; then
 	{
 		## AT_SETUP:test_33
 		echo "${_org_fname}: mv: $(gettext 'This GNU command is not installed, or invalid path/link settings.')"
-		echo "$(gettext 'See'): https://man.cx/mv(1)"
+		gettext 'See'; echo ': https://man.cx/mv(1)'
 	} >&2; exit 1
 fi
 
 ## @~Japanese
 ## メインプログラム開始。コマンドライン引数を解析します。
-## @attention このプログラムを bash などのシェルから起動する場合は、シェル側で規定されている終了ステータスの仕様を必ず確認してください。（参考：[Exit Codes With Special Meanings](http://tldp.org/LDP/abs/html/exitcodes.html)）
+## @attention
+## - このプログラムを bash などのシェルから起動する場合は、シェル側で規定されている終了ステータスの仕様を必ず確認してください。（参考：[Exit Codes With Special Meanings](http://tldp.org/LDP/abs/html/exitcodes.html)）
+## - _i に ${#} による計算結果を格納し、_i を再利用します。
 ## @~
-if [ $# -lt 1 ] ; then
+_i=${#}
+if ((_i<1)) ; then
 	## AT_SETUP:test_1
 	## @~Japanese
 	## - 制御コードに対するセキュリティを強化（制御コードを解釈しないように）しています。
@@ -277,9 +350,9 @@ if [ $# -lt 1 ] ; then
 	## @~
 	{
 		echo "${_org_fname}: $(gettext 'missing file operand')"
-		echo "$(gettext 'Try the following command'): ${_org_fname} --help"
+		gettext 'Try the following command'; echo ": ${_org_fname} --help"
 	} >&2 ; exit 1
-elif [ $# -gt 4 ] ; then
+elif ((_i>4)) ; then
 	## AT_SETUP:test_2
 	## @~Japanese
 	## - 制御コードに対するセキュリティを強化（制御コードを解釈しないように）しています。
@@ -289,15 +362,14 @@ elif [ $# -gt 4 ] ; then
 	_s=$(errno E2BIG)
 	{
 		echo "${_org_fname}: ${_s#* * }"
-		echo "$(gettext 'Try the following command'): ${_org_fname} --help"
+		gettext 'Try the following command'; echo ": ${_org_fname} --help"
 	} >&2; exit 1
 fi
 ## @~Japanese
 ## オプション引数を解析します。
 ## @attention 空白文字を含む文字列を正しく展開できるように、$@ をダブルコーテーションで必ず囲むようにしてください。
 ## @~
-_s=$(getopt --options "" --longoptions msgdir:,msginfo,help,version -- "$@" 2>&1)
-if [ $? -ne 0 ] ; then
+if ! _s=$(getopt --options "" --longoptions msgdir:,msginfo,help,version -- "$@" 2>&1) ; then
 	## AT_SETUP:test_3
 	## @~Japanese
 	## - 制御コードに対するセキュリティを強化（制御コードを解釈しないように）しています。
@@ -307,7 +379,7 @@ if [ $? -ne 0 ] ; then
 	_s=$(errno EINVAL)
 	{
 		echo "${_org_fname}: ${_s#* * }"
-		echo "$(gettext 'Try the following command'): ${_org_fname} --help"
+		gettext 'Try the following command'; echo ": ${_org_fname} --help"
 	} >&2; exit 1
 fi
 ## @~Japanese
@@ -322,32 +394,32 @@ _textdomaindir=''
 ## @~
 while true; do
 	case "$1" in
-	--msgdir ):
+	'--msgdir' ):
 		## @~Japanese
 		## メッセージカタログの検索ディレクトリーを保存します。
 		## @attention 同じオプションが複数回見つかった場合は、その回数分だけ以下の処理が呼び出されます。
 		## @~
 		_textdomaindir=$2
 		shift 2 ;;
-	--msginfo ):
+	'--msginfo' ):
 		## AT_SETUP:test_6
 		## @~Japanese
 		## メッセージカタログ情報を出力します。
 		## @~
 		__msginfo ;;
-	--help ):
+	'--help' ):
 		## AT_SETUP:test_4
 		## @~Japanese
 		## ヘルプを出力します。
 		## @~
 		__help ;;
-	--version ):
+	'--version' ):
 		## AT_SETUP:test_5
 		## @~Japanese
 		## バージョン情報を出力します。
 		## @~
 		__version ;;
-	-- ):
+	'--' ):
 		## @~Japanese
 		## オプションの終端記号が見つかった場合の処理
 		## @attention
@@ -358,7 +430,10 @@ while true; do
 		break ;;
 	esac
 done
-if [ $# -ne 3 ] ; then
+## @~Japanese
+## @attention ${#} による計算結果は、以下で一度しか参照されないため、${#} を _i にコピーせず、直接評価します。
+## @~
+if ((${#}!=3)) ; then
 	## AT_SETUP:test_7
 	## @~Japanese
 	## - 制御コードに対するセキュリティを強化（制御コードを解釈しないように）しています。
@@ -368,7 +443,7 @@ if [ $# -ne 3 ] ; then
 	_s=$(errno EINVAL)
 	{
 		echo "${_org_fname}: ${_s#* * }"
-		echo "$(gettext 'Try the following command'): ${_org_fname} --help"
+		gettext 'Try the following command'; echo ": ${_org_fname} --help"
 	} >&2; exit 1
 fi
 
@@ -378,8 +453,7 @@ fi
 ## - 空白文字を含む文字列を正しく展開できるように、$1 をダブルコーテーションで必ず囲むようにしてください。
 ## - $1 で指定された文字列には制御コードが含まれている可能性があります。標準出力などへ出力する際は、十分に注意してください。
 ## @~
-_po_long_name=$(realpath -e "$1" 2>&1)
-if [ $? -ne 0 ] ; then
+if ! _po_long_name=$(realpath -e "$1" 2>&1) ; then
 	## AT_SETUP:test_8
 	## @~Japanese
 	## 簡潔なエラーメッセージを標準エラーに出力します。
@@ -394,8 +468,7 @@ fi
 ## - 空白文字を含む文字列を正しく展開できるように、$2 をダブルコーテーションで必ず囲むようにしてください。
 ## - $2 で指定された文字列には制御コードが含まれている可能性があります。標準出力などへ出力する際は、十分に注意してください。
 ## @~
-_bats_long_name=$(realpath "$2" 2>&1)
-if [ $? -ne 0 ] ; then
+if ! _bats_long_name=$(realpath "$2" 2>&1) ; then
 	## AT_SETUP:test_9
 	## @~Japanese
 	## 簡潔なエラーメッセージを標準エラーに出力します。
@@ -412,7 +485,7 @@ fi
 ## @~
 _s=$LANG
 LANG='C'
-if [ ${#3} -gt 255 ] ; then
+if ((${#3}>255)) ; then
 	## AT_SETUP:test_10
 	LANG=${_s}
 	## @~Japanese
@@ -428,7 +501,7 @@ fi
 ## - TEXTDOMAINDIR に指定可能な文字列の最大バイト数を 4095 に制限します。
 ## - TEXTDOMAINDIR に指定された文字列には制御コードが含まれている可能性があります。標準出力などへ出力する際は、十分に注意してください。
 ## @~
-if [ ${#_textdomaindir} -gt 4095 ] ; then
+if ((${#_textdomaindir}>4095)) ; then
 	## AT_SETUP:test_11
 	LANG=${_s}
 	## @~Japanese
@@ -454,7 +527,7 @@ if [ "${_textdomaindir}" = '<test_12>' ] ; then
 fi
 _chksum_temp_name=$(mktemp 2>&1)
 _chksum_temp_err=$?
-if [ ${_chksum_temp_err} -ne 0 ] ; then
+if ((_chksum_temp_err !=0)) ; then
 	## AT_SETUP:test_12
 	{
 		echo "${_org_fname}: ${_chksum_temp_name}"
@@ -475,7 +548,7 @@ if [ "${_textdomaindir}" = '<test_13>' ] ; then
 fi
 _bats_temp_name=$(mktemp 2>&1)
 _bats_temp_err=$?
-if [ ${_bats_temp_err} -ne 0 ] ; then
+if ((_bats_temp_err !=0)) ; then
 	## AT_SETUP:test_13
 	{
 		echo "${_org_fname}: ${_bats_temp_name}"
@@ -496,7 +569,7 @@ if [ "${_textdomaindir}" = '<test_14>' ] ; then
 	## AT_SETUP:test_14
 	chmod -w "${_bats_temp_name}"
 fi
-function __header() { :
+__header() { :
 	echo '#!/usr/bin/env bats'
 	echo '################################################################################'
 	echo "# $(gettext 'This file was automatically generated by po2bats.sh. Do not edit!')"
@@ -506,8 +579,7 @@ function __header() { :
 	echo "  basecmd=\"gettext -e --domain=\"${_textdomain}\"\""
 	echo '}'
 }
-_s=$(__header 2>&1 > "${_bats_temp_name}")
-if [ $? -ne 0 ] ; then
+if ! _s=$(__header 2>&1 > "${_bats_temp_name}") ; then
 	## AT_SETUP:test_14
 	## @~Japanese
 	## 簡潔なエラーメッセージを標準エラーに出力します。
@@ -531,14 +603,14 @@ case "${_textdomaindir}" in
 ## AT_SETUP:test_17
 '<test_17>' ) _po_long_name='abc' ;;
 esac
-function __body () {
+__body () { :
 	## @~Japanese
 	## - プログラムの状態変数 _n に初期値 0 （キーワード検索中という状態を表す）を設定します。
 	## - メッセージ・カウンター _i に初期値 0 を設定します。
 	## - 行カウンター _no に初期値 0 を設定します。
 	## @~
 	_n=0; _i=0; _no=0;
-	while read -r _line ; do
+	if ! { while read -r _line ; do
 		## @~Japanese
 		## 行カウンターをインクリメントします。
 		## @~
@@ -555,7 +627,7 @@ function __body () {
 			## @~Japanese
 			## _s が空で _n が 2 なら、キーワード msgstr の値の抽出は終わりです。
 			## @~
-			if [ ${_n} -eq 2 ] ; then
+			if ((_n==2)) ; then
 				## @~Japanese
 				## 「キーワード検索中」という状態をプログラムに通知します。
 				## @~
@@ -570,8 +642,7 @@ function __body () {
 				## - 出力レイアウトをイメージしやすいようにコーディングしています。
 				## - コマンドの呼び出し回数を減らして処理速度を上げるよりも、セキュリティ強化を重視しています。
 				## @~
-				{
-					if [ -z "${_msgid}" ] ; then
+				if ! { if [ -z "${_msgid}" ] ; then
 						_s=${_msgstr##*Language: }
 						_s=${_s%%\\*}
 						_s="${_textdomaindir}/${_s}/LC_MESSAGES/${_textdomain}.mo"
@@ -585,19 +656,15 @@ function __body () {
 					fi
 					echo "  run \$basecmd \"${_msgid}\""
 					echo "  [ \"\$output\" = \"\$(echo -e \"${_msgstr}\")\" ]"
-					echo '}'
-				} >> "${_bats_temp_name}"; if [ $? -ne 0 ] ; then
+					echo '}' ; } >> "${_bats_temp_name}"; then exit 2
 					## @~Japanese
 					## BATS テンポラリー・ファイルの書き込み中にエラーが発生したことをプログラムに通知し、子プロセスを終了します。
 					## @attention _s にエラーメッセージが格納されます。
-					## @~
-					exit 2
 				fi
 				## @~Japanese
 				## 翻訳されたメッセージのチェックサム（メッセージ・ダイジェスト）生成処理で使用されるテンポラリー・ファイルに追加書き込みします。
 				## @~
-				echo -en "${_msgstr}" >> "${_chksum_temp_name}"
-				if [ $? -ne 0 ] ; then
+				if ! echo -en "${_msgstr}" >> "${_chksum_temp_name}" ; then
 					## @~Japanese
 					## 翻訳されたメッセージのチェックサム（メッセージ・ダイジェスト）生成処理で使用されるテンポラリー・ファイルの書き込み中にエラーが発生したことをプログラムに通知し、子プロセスを終了します。
 					## @attention _s にエラーメッセージが格納されます。
@@ -658,7 +725,7 @@ function __body () {
 		## @~Japanese
 		## 「キーワード msgid が見つかった」という状態を維持している場合の処理
 		## @~
-		elif [ ${_n} -eq 1 ] ; then
+		elif ((_n==1)) ; then
 			## @~Japanese
 			## キーワード msgid の連続する値の抽出と連結を行います。
 			## @~
@@ -672,7 +739,7 @@ function __body () {
 		## @~Japanese
 		## 「キーワード msgstr が見つかった」という状態を維持している場合の処理
 		## @~
-		elif [ ${_n} -eq 2 ] ; then
+		elif ((_n==2)) ; then
 			## @~Japanese
 			## キーワード msgstr の連続する値の抽出と連結を行います。
 			## @~
@@ -684,14 +751,12 @@ function __body () {
 				_msgstr=${_msgstr}${_s:0:-1}
 			fi
 		fi
-	done 2>&1 < "${_po_long_name}"; if [ $? -ne 0 ] ; then
 		## @~Japanese
 		## PO ファイルの読み込み中エラーを検出した。
 		## @attention _s にエラーメッセージが格納されます。
 		## @~
-		exit 1
-	fi
-	if [ ${_i} -gt 0 ] ; then
+	done 2>&1 < "${_po_long_name}"; }; then exit 1; fi
+	if ((_i>0)) ; then
 		## @~Japanese
 		## テスト件数を BATS テンポラリー・ファイルに追加書き込みします。
 		## @attention 子プロセス内で変数に設定された値は子プロセス内でしか参照できません。
@@ -700,8 +765,7 @@ function __body () {
 			## AT_SETUP:test_26
 			chmod -w "${_bats_temp_name}"
 		fi
-		echo "# $(gettext 'Test counts'): ${_i}" 2>&1 >> "${_bats_temp_name}"
-		if [ $? -ne 0 ] ; then
+		if ! { echo "# $(gettext 'Test counts'): ${_i}" >> "${_bats_temp_name}" ; } 2>&1; then
 			## AT_SETUP:test_26
 			## @~Japanese
 			## BATS テンポラリー・ファイルの書き込み中にエラーが発生したことをプログラムに通知し、子プロセスを終了します。
@@ -722,9 +786,8 @@ function __body () {
 		exit 1
 	fi
 }
-_s=$(__body)
-_n=$?
-case ${_n} in
+_s=$(__body); _i=$?
+case "${_i}" in
 ## @~Japanese
 ## PO ファイルの読み込み中にエラーが発生した場合の処理
 ## @~
@@ -763,8 +826,7 @@ if [ "${_textdomaindir}" = '<test_18>' ] ; then
 	## AT_SETUP:test_18
 	_chksum_temp_name='abc'
 fi
-_s=$(sha256sum "${_chksum_temp_name}" 2>&1)
-if [ $? -ne 0 ] ; then
+if ! _s=$(sha256sum "${_chksum_temp_name}" 2>&1) ; then
 	## @~Japanese
 	## 簡潔なエラーメッセージを標準エラーに出力します。
 	## @~
@@ -779,8 +841,7 @@ if [ "${_textdomaindir}" = '<test_19>' ] ; then
 	## AT_SETUP:test_19
 	chmod -w "${_bats_temp_name}"
 fi
-_s=$(echo "# $(gettext 'CHECKSUM (message digest) for all translated messages'): ${_s%% *}" 2>&1 >> "${_bats_temp_name}")
-if [ $? -ne 0 ] ; then
+if ! _s=$({ printf "# %s: ${_s%% *}\n" "$(gettext 'CHECKSUM (message digest) for all translated messages')" >> "${_bats_temp_name}" ; } 2>&1) ; then
 	## @~Japanese
 	## 簡潔なエラーメッセージを標準エラーに出力します。
 	## @~
@@ -805,8 +866,7 @@ case "${_textdomaindir}" in
 ## AT_SETUP:test_22
 '<test_22>' ) echo 'abc' > "${_bats_long_name}" ;;
 esac
-_s=$({ chmod +x "${_bats_temp_name}" && mv -nTZ "${_bats_temp_name}" "${_bats_long_name}"; } 2>&1)
-if [ $? -ne 0 ] ; then
+if ! _s=$({ chmod +x "${_bats_temp_name}" && mv -nTZ "${_bats_temp_name}" "${_bats_long_name}"; } 2>&1) ; then
 	## AT_SETUP:test_20
 	## AT_SETUP:test_21
 	## @~Japanese

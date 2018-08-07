@@ -2,28 +2,130 @@
 # - See https://docs.travis-ci.com/ for this file.
 # - This file can be validated with the command 'travis lint path/to/.travis.yml'.
 # - Install 'travis' from https://github.com/travis-ci/travis.rb#lint.
+# - 2019-04-02: kim <kimkim19642004@yahoo.co.jp>
+#	The following error is displayed but there is no particular problem.
+#	(See also) https://github.com/travis-ci/travis.rb/issues/559
+#
+#	Warnings for .travis.yml:
+#	[x] in matrix.include section: unexpected key osx_image, dropping
+#	[x] in matrix.include section: unexpected key dist, dropping
+#	[x] in matrix.include section: unexpected key sudo, dropping
 
 branches:
   only: master
 
-# Testing environment
-# Ubuntu 16.04 LTS (Travis CI Beta test setting: 2018/10/04)
-# Mac OS X 10.13, Xcode 9.4.1 (Travis CI default setting: 2018/10/04)
-os:
-#  - linux
-  - osx
-#dist: xenial
-sudo: required
-
 language: cpp
-compiler:
-  - g++
-#  - clang++
-env:
-#  - LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=on
-#  - LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=off
-#  - LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=on
-  - LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=off
+
+# Testing environment
+# Ubuntu 16.04 LTS (Xenial)
+# Mac OS X 10.13, Xcode 10.1 (macOS High Sierra)
+# Mac OS X 10.14, Xcode 10.2 (macOS Mojave)
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=on
+      compiler: g++
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=off
+      compiler: g++
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=on
+      compiler: g++
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=off
+      compiler: g++
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=on
+      compiler: clang++
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=off
+      compiler: clang++
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=on
+      compiler: clang++
+    - os: linux
+      dist: xenial
+      sudo: required
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=off
+      compiler: clang++
+    - os: osx
+      osx_image: xcode10.1
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=on
+      compiler: g++
+    - os: osx
+      osx_image: xcode10.1
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=off
+      compiler: g++
+    - os: osx
+      osx_image: xcode10.1
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=on
+      compiler: g++
+    - os: osx
+      osx_image: xcode10.1
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=off
+      compiler: g++
+    - os: osx
+      osx_image: xcode10.1
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=on
+      compiler: clang++
+    - os: osx
+      osx_image: xcode10.1
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=off
+      compiler: clang++
+    - os: osx
+      osx_image: xcode10.1
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=on
+      compiler: clang++
+    - os: osx
+      osx_image: xcode10.1
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=off
+      compiler: clang++
+    - os: osx
+      osx_image: xcode10.2
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=on
+      compiler: g++
+    - os: osx
+      osx_image: xcode10.2
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=off
+      compiler: g++
+    - os: osx
+      osx_image: xcode10.2
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=on
+      compiler: g++
+    - os: osx
+      osx_image: xcode10.2
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=off
+      compiler: g++
+    - os: osx
+      osx_image: xcode10.2
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=on
+      compiler: clang++
+    - os: osx
+      osx_image: xcode10.2
+      env: LANGUAGE=en_US.UTF-8 LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 REBUILD_INSTALLER=off
+      compiler: clang++
+    - os: osx
+      osx_image: xcode10.2
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=on
+      compiler: clang++
+    - os: osx
+      osx_image: xcode10.2
+      env: LANGUAGE=ja_JP.UTF-8 LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 REBUILD_INSTALLER=off
+      compiler: clang++
 
 install: ./install_tools.sh
 script: ./script.sh

@@ -1,0 +1,53 @@
+dnl Process this file with autoconf to produce a testsuite script.
+
+dnl ### Initialization ###
+AT_INIT
+AT_COPYRIGHT([Copyright (c) 2018-2019 kim])
+AT_COLOR_TESTS
+dnl # Note: List the commands for which you want to check the version.
+dnl # The command 'which' has no option for displaying the version.
+AT_TESTED([bash shellcheck])
+@CODE_COVERAGE_ENABLED_TRUE@AT_TESTED([kcov])
+
+AT_BANNER([Static Code Analysis])
+m4_include([sh_chk.at])
+
+AT_BANNER([Functional Test])
+m4_include([test_1.at])
+m4_include([test_2.at])
+m4_include([test_3.at])
+m4_include([test_4.at])
+m4_include([test_5.at])
+m4_include([test_6.at])
+m4_include([test_7.at])
+m4_include([test_8.at])
+m4_include([test_9.at])
+m4_include([test_10.at])
+m4_include([test_11.at])
+m4_include([test_12.at])
+m4_include([test_13.at])
+m4_include([test_14.at])
+m4_include([test_15.at])
+m4_include([test_16.at])
+m4_include([test_17.at])
+m4_include([test_18.at])
+m4_include([test_19.at])
+m4_include([test_20.at])
+m4_include([test_21.at])
+m4_include([test_22.at])
+m4_include([test_23.at])
+m4_include([test_24.at])
+m4_include([test_25.at])
+m4_include([test_26.at])
+m4_include([test_27.at])
+m4_include([test_28.at])
+m4_include([test_29.at])
+m4_include([test_30.at])
+m4_include([test_31.at])
+m4_include([test_32.at])
+m4_include([test_33.at])
+m4_include([test_34.at])
+m4_include([test_35.at])
+
+@CODE_COVERAGE_ENABLED_TRUE@AT_BANNER([Code Coverage])
+@CODE_COVERAGE_ENABLED_TRUE@m4_include([mk_coverage.at])

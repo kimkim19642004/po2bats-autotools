@@ -1,0 +1,13 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP([test_8])
+AT_KEYWORDS([test_8])
+
+m4_define([__commands__], [po2bats.sh 'a b' "c d" 'e f'])
+AT_CHECK([__commands__], [1],,
+[po2bats.sh: PO error: No such file or directory
+])
+
+@CODE_COVERAGE_ENABLED_TRUE@AT_CHECK([__kcov__ __commands__], [1],, [ignore])
+
+AT_CLEANUP

@@ -1,15 +1,14 @@
 dnl Include this file in 'testsuite.at'.
 
-AT_SETUP(test_4)
-AT_KEYWORDS(test_4)
+AT_SETUP([test_4])
+AT_KEYWORDS([test_4])
 
 dnl ### Disguise reserved words ###
 dnl ## Avoids error checking by Autoconf editor.
 m4_define([__for__], [for])
 
 m4_define([__commands__], [po2bats.sh --help])
-
-AT_CHECK(__commands__,,
+AT_CHECK([__commands__],,
 [Usage: po2bats.sh @<:@OPTION@:>@ PO BATS TEXTDOMAIN
 Generate BATS file from PO file
 
@@ -26,6 +25,9 @@ TEXTDOMAIN,TEXTDOMAINDIR:
 
 URL: AT_PACKAGE_URL
 Report bugs to: AT_PACKAGE_BUGREPORT
-],,, kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage __commands__)
+])
+
+m4_define([__kcov__], [kcov --bash-parser="@S|@(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern='po2bats.sh' --exclude-pattern='po2bats.sh.in' "@S|@{abs_builddir}/coverage"])
+AT_CHECK([__kcov__ __commands__],, [ignore])
 
 AT_CLEANUP

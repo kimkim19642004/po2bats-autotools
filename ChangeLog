@@ -1,7 +1,10 @@
-2019-03-26  kim  <kimkim19642004@yahoo.co.jp>
+2019-04-11  kim  <kimkim19642004@yahoo.co.jp>
 	* configure.ac: Update file.
-		- Changed notation of revision: from '0.1.2' to '0.1.3'.
-		- Fixed minor description errors.
+		- Changed notation of version: from '0.1.1' to '0.2.0'.
+		- Changed notation of revision: from '0.1.2' to '0.1.0'.
+		- Conducted code review.
+	* Makefile.am: Update file.
+		- Conducted code review.
 	* NEWS: Update file.
 		- Fixed minor description errors.
 	* README: Update file.

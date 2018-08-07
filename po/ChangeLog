@@ -1,3 +1,17 @@
+2019-04-10  kim  <kimkim19642004@yahoo.co.jp>
+	* ja.po: Update file.
+		- Changed notation of version: from '0.1.1' to '0.2.0'.
+		- Added translated messages corresponding to the following msids:
+			- called from an unknown or unsupported shell
+			- Unsupported Shell Options
+	* po2bats.pot: Update file.
+		- Changed notation of version: from '0.1.1' to '0.2.0'.
+		- Fixed the following msids:
+			- called from an unknown or unsupported shell
+			- Unsupported Shell Options
+	* Makevars: Update file.
+		- Changed notation of version: from '0.1.1' to '0.2.0'.
+
 2019-02-26  kim  <kimkim19642004@yahoo.co.jp>
 
 	* ja.po: Update file.
