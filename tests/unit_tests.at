@@ -1,0 +1,15 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP(unit_tests)
+AT_KEYWORDS(unit-tests)
+
+dnl ### Start unit tests. ###
+AT_CHECK($AUTOTEST_PATH/po2bats.sh --help, 0, stdout, stderr,
+  AT_CHECK($abs_top_builddir/src/po2bats.sh --help, 0, stdout, stderr))
+AT_CHECK($AUTOTEST_PATH/po2bats.sh --version, 0, stdout, stderr,
+  AT_CHECK($abs_top_builddir/src/po2bats.sh --version, 0, stdout, stderr))
+AT_CHECK($AUTOTEST_PATH/po2bats.sh --msginfo, 0, stdout, stderr,
+  AT_CHECK($abs_top_builddir/src/po2bats.sh --msginfo, 0, stdout, stderr))
+dnl ### End unit tests. ###
+
+AT_CLEANUP

@@ -1,0 +1,10 @@
+dnl Process this file with autoconf to produce a testsuite script.
+
+dnl ### Initialization ###
+AT_INIT
+AT_COPYRIGHT(Copyright (c) 2018 kim)
+AT_COLOR_TESTS
+
+dnl ### Start functional test. ###
+AT_BANNER(Functional test)
+m4_include(unit_tests.at)

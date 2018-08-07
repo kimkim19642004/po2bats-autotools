@@ -1,0 +1,14 @@
+2018-08-06
+
+	* po2bats 0.1.0: New project.  by kim  <kimkim19642004@yahoo.co.jp>
+		Application development environment:
+			Distribution: Fedora28 Workstation
+				Memory: 7.6 GiB
+				Processor: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz × 4
+				Graphic: Intel(R) Sandybridge Mobile
+				Desktop Environment: GNOME 3.28.2
+				OS Type: 64 bit
+				Disk: 134.0 GB
+				Display server: Wayland
+				LANG (environment variable): ja_JP.UTF-8
+				Require-RPM-packages: sudo dnf install bats
