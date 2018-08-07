@@ -80,7 +80,7 @@ $ sudo dnf install git-gui
 The installation procedure of this software is as follows:
 ```
 $ cd $HOME
-$ git clone https://github.com/kimkim19642004/po2bats-autotools/po2bats-0.1.0.git
+$ git clone https://github.com/kimkim19642004/po2bats-autotools.git
 $ cd po2bats-0.1.0
 $ ./configure && make
 $ make check
