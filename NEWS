@@ -1,14 +1,45 @@
-2018-08-06
+2018-11-03
 
 	* po2bats 0.1.0: New project.  by kim  <kimkim19642004@yahoo.co.jp>
-		Application development environment:
-			Distribution: Fedora28 Workstation
-				Memory: 7.6 GiB
-				Processor: Intel(R) Core(TM) i5-2410M CPU @ 2.30GHz × 4
-				Graphic: Intel(R) Sandybridge Mobile
-				Desktop Environment: GNOME 3.28.2
-				OS Type: 64 bit
-				Disk: 134.0 GB
-				Display server: Wayland
-				LANG (environment variable): ja_JP.UTF-8
-				Require-RPM-packages: sudo dnf install bats
+		Tested platforms:
+			Fedora 29:
+				sudo dnf install autoconf-archive bats moreutils kcov ShellCheck
+
+			Fedora 28:
+				sudo dnf install autoconf-archive bats moreutils kcov ShellCheck
+
+			[Basix 4.0](http://simosnet.com/livecdroom/) (like Ubuntu 18.04 LTS):
+				sudo apt install autoconf-archive bats moreutils kcov shellcheck
+				(Note)
+					If there is any problem with the package installed by the command 'sudo apt install kcov',
+					try installing 'kcov' from https://github.com/SimonKagstrom/kcov/.
+					In that case also run the following command: sudo apt install build-essential
+				(URL)
+					http://simosnet.com/livecdroom/Ubuntu 18.04 LTS)
+
+			Ubuntu 16.04 LTS (on Travis CI):
+				sudo apt install autoconf-archive bats moreutils kcov shellcheck
+				(Note 1)
+					If there is any problem with the package installed by the command 'sudo apt install kcov',
+					try installing 'kcov' from https://github.com/SimonKagstrom/kcov/.
+				(Note 2)
+					Since the versions of 'automake' and 'gettext' are old,
+					reconfigure this build system before execute the command './ configure && make'.
+					Execute as follows:
+						sudo apt install autopoint expect
+						./gettextize.exp
+						autoreconf -f -i
+						./ configure && make
+				(URL)
+					https://travis-ci.com/kimkim19642004/po2bats-autotools
+
+			Mac OS X 10.13, Xcode 9.4.1 (on Travis CI):
+				brew install autoconf-archive bats-core moreutils kcov shellcheck gnu-getopt
+				brew link --force gettext gnu-getopt
+				export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+				export MANPATH=$(brew --prefix coreutils)/libexec/gnubin:$MANPATH
+				(Note)
+					If there is any problem with the package installed by the command 'brew install kcov',
+					try installing 'kcov' from https://github.com/SimonKagstrom/kcov/.
+				(URL)
+					https://travis-ci.com/kimkim19642004/po2bats-autotools

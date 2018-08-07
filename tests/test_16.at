@@ -1,0 +1,12 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP(test_16)
+AT_KEYWORDS(test_16)
+
+m4_define([__commands__], [po2bats.sh --msgdir='<test_16>' "$abs_top_srcdir/po/ja.po" aaa bbb])
+
+AT_CHECK(__commands__, 1,,
+[po2bats.sh: CHECKSUM (message digest) tempfile error: Permission denied
+], AT_CHECK(test $at_status -eq 0), kcov --collect-only --include-pattern=po2bats.sh --exclude-pattern=po2bats.sh.in @S|@{abs_builddir}/coverage __commands__)
+
+AT_CLEANUP

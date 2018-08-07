@@ -1,0 +1,8 @@
+dnl Include this file in 'testsuite.at'.
+
+AT_SETUP(sh_chk)
+AT_KEYWORDS(sh_chk)
+
+AT_CHECK([shellcheck -e SC2005,SC2069,SC2116,SC2181 @S|@{at_dir}/po2bats.sh])
+
+AT_CLEANUP
