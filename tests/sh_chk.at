@@ -3,6 +3,6 @@ dnl Include this file in 'testsuite.at'.
 AT_SETUP([sh_chk])
 AT_KEYWORDS([sh_chk])
 
-AT_CHECK([shellcheck "@S|@{at_dir}/po2bats.sh"])
+AT_CHECK([shellcheck "${at_dir}/po2bats.sh"])
 
 AT_CLEANUP

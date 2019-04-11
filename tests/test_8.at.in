@@ -8,6 +8,7 @@ AT_CHECK([__commands__], [1],,
 [po2bats.sh: PO error: No such file or directory
 ])
 
+@CODE_COVERAGE_ENABLED_TRUE@m4_define([__kcov__], [kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern='po2bats.sh' --exclude-pattern='po2bats.sh.in' "${abs_builddir}/coverage"])
 @CODE_COVERAGE_ENABLED_TRUE@AT_CHECK([__kcov__ __commands__], [1],, [ignore])
 
 AT_CLEANUP

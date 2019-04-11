@@ -103,6 +103,9 @@ VAR_FLAG='no'; AC_PATH_PROGS_FEATURE_CHECK([MV_FEATURE], [mv gmv], [
 	VAR_FLAG='yes'
 ], [AC_MSG_FAILURE([mv: This GNU command is not installed[,] or invalid path/link settings.])])
 
+dnl ## Searches for a GNU version of 'make'.
+AX_CHECK_GNU_MAKE(, [AC_MSG_FAILURE([Package 'GNU Make' not installed, or invalid path/link settings. See <https://www.gnu.org/software/make/>.])])
+
 dnl ### Settings for Code coverage ###
 AX_CODE_COVERAGE
 AC_ARG_ENABLE([testcode],
@@ -110,7 +113,7 @@ AC_ARG_ENABLE([testcode],
 	[AC_SUBST([ENABLE_TESTCODE_TRUE])], [AC_SUBST([ENABLE_TESTCODE_TRUE], [@%:@])])
 dnl ## Note: Coped with the case where '/usr/local/bin' is not included in the root user's PATH.
 AS_IF([test "${enable_code_coverage}" = 'yes'], [
-	VAR_NAME='kcov'; AC_PATH_PROG([VAR_KCOV], [${VAR_NAME}], [no], [/usr/local/bin$PATH_SEPARATOR$PATH])
+	VAR_NAME='kcov'; AC_PATH_PROG([VAR_KCOV], [${VAR_NAME}], [no])
 	AS_IF([test "x${VAR_KCOV}" = 'xno'], [AC_MSG_FAILURE([${VAR_NAME}: command not found. Package '${VAR_NAME}' not installed, or invalid path/link settings. See <https://github.com/SimonKagstrom/kcov/>.])])
 ])
 

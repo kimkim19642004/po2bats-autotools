@@ -11,9 +11,12 @@ References:
 [![Latest release](https://img.shields.io/github/release/kimkim19642004/po2bats-autotools.svg)](https://github.com/kimkim19642004/po2bats-autotools/releases/latest)
 [![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![Build Status](https://travis-ci.com/kimkim19642004/po2bats-autotools.svg?branch=master)](https://travis-ci.com/kimkim19642004/po2bats-autotools)
+[![Build status](https://ci.appveyor.com/api/projects/status/qafbcbuw0o125h2b/branch/master?svg=true)](https://ci.appveyor.com/project/kimkim19642004/po2bats-autotools/branch/master)
+[![Build Status](https://api.cirrus-ci.com/github/kimkim19642004/po2bats-autotools.svg)](https://cirrus-ci.com/github/kimkim19642004/po2bats-autotools)
 [![Coverage Status](https://coveralls.io/repos/github/kimkim19642004/po2bats-autotools/badge.svg?branch=master)](https://coveralls.io/github/kimkim19642004/po2bats-autotools?branch=master)
 [![codecov](https://codecov.io/gh/kimkim19642004/po2bats-autotools/branch/master/graph/badge.svg)](https://codecov.io/gh/kimkim19642004/po2bats-autotools)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/07329e94d8fc4d1caeac4e3b53c556ab)](https://www.codacy.com/app/kimkim19642004/po2bats-autotools?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kimkim19642004/po2bats-autotools&amp;utm_campaign=Badge_Grade)
+[![CodeFactor](https://www.codefactor.io/repository/github/kimkim19642004/po2bats-autotools/badge)](https://www.codefactor.io/repository/github/kimkim19642004/po2bats-autotools)
 
 Note:
 - [ShellCheck](https://www.shellcheck.net/) support of [Code Climate](https://codeclimate.com/) is insufficient.
@@ -22,11 +25,11 @@ Note:
 # po2bats
 
 This is a shell script to generate BATS file from PO file.
-Running the bats script allows you to test the integrity of MO files installed on your system and PO files that is the sources.
+Running the bats script allows you to verify the integrity between MO file installed on your system and PO file which is that source file.
 
 Note:
 - See [The Format of PO Files](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html).
-- See [The Format of MO Files](https://www.gnu.org/software/gettext/manual/html_node/MO-Files.html).
+- See [The Format of GNU MO Files](https://www.gnu.org/software/gettext/manual/html_node/MO-Files.html).
 - See [Bats-core: Bash Automated Testing System (2018)](https://github.com/bats-core/bats-core).
 
 Some of usages of this command are shown below.
@@ -56,10 +59,14 @@ How to generate and execute BATS file (Example in Japanese locale):
 ```
 $ echo $LANG
 ja_JP.UTF-8
-$ po2bats-autotools]$ po2bats.sh --msgdir=/usr/local/share/locale po/ja.po ja.bats po2bats
+$ po2bats.sh --msgdir=/usr/local/share/locale po/ja.po ja.bats po2bats
 $ ./ja.bats
  ✓ ls /usr/local/share/locale/ja/LC_MESSAGES/po2bats.mo
  ✓ (null)
+ ✓ called from an unknown or unsupported shell
+ ✓ Unauthorized user
+ ✓ Unsupported Shell Options
+ ✓ See
  ✓ Usage
  ✓ OPTION
  ✓ Generate BATS file from PO file
@@ -72,7 +79,6 @@ $ ./ja.bats
  ✓ See gettext command help for more information
  ✓ Report bugs to
  ✓ This GNU command is not installed, or invalid path/link settings.
- ✓ See
  ✓ missing file operand
  ✓ Try the following command
  ✓ PO error
@@ -89,16 +95,16 @@ $ ./ja.bats
  ✓ cannot move tempfile to target BATS file
  ✓ Target BATS file not found
 
-30 tests, 0 failures
+33 tests, 0 failures
 ```
 Note:
 - 'ja.po' is an existing Japanese PO file.
-- Place Japanese MO file 'test.mo' in the directory '/usr/local/share/locale/ja/LC_MESSAGES'.
-- You can display the help of BATS command by executing command './ja.bats -h'.
+- Place the japanese MO file 'test.mo' in the directory '/usr/local/share/locale/ja/LC_MESSAGES'.
+- You can display the help information about BATS command by executing the command './ja.bats -h'.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [Deployment](#id_deployment) for notes on how to deploy the project on a live system.
+The following instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [Deployment](#id_deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
@@ -106,21 +112,35 @@ Install necessary packages for installing this software.
 
 When the latest version of [Fedora](https://getfedora.org/) is clean installed:
 ```
+## Installing and updating basic software
 $ sudo dnf install dnf-plugins-extras-tracer
 $ sudo dnf upgrade
 $ sudo dnf groupinstall "C Development Tools and Libraries"
 $ sudo dnf groupinstall "Development Tools"
 $ sudo dnf install gettext-devel autoconf-archive
-$ sudo dnf install bats moreutils kcov lcov ShellCheck
+$ sudo dnf install bats moreutils lcov ShellCheck
 
-(Let's also install the language pack! Example in Japanese locale:)
+## Requires for [kcov](https://github.com/SimonKagstrom/kcov/)
+$ sudo dnf install elfutils-libelf-devel libcurl-devel binutils-devel elfutils-devel cmake
+
+## Manual installation (Example: Japanese)
 $ sudo dnf install man-pages-ja glibc-langpack-ja
 (Don't forget to check the current locale information with the command 'locale'!)
+
+## Install [kcov](https://github.com/SimonKagstrom/kcov/)
+$ cd $HOME
+$ git clone https://github.com/SimonKagstrom/kcov.git
+$ cd kcov
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ sudo make install
 ```
 Follow instructions of the DNF command, restart the specified applications, or reboot your system, or login to your system again.
 
 Note:
-- If Plugin for DNF command [dnf-plugins-extras-tracer](http://tracer.readthedocs.io/en/latest/user-guide/) is installed on your system, the DNF command will display information about running applications that need to be restarted. This plugin is useful, but it may take time to execute. To disable this plugin, specify '--disableplugin=tracer' as the command option.
+- If Plugin for DNF command [dnf-plugins-extras-tracer](http://tracer.readthedocs.io/en/latest/user-guide/) is installed on your system, the DNF command will display information on running applications that need to be restarted. This plugin is useful, but it may take time to execute. To disable this plugin, specify '--disableplugin=tracer' as the command option.
 
 ### Installing
 
@@ -130,8 +150,8 @@ $ cd $HOME
 $ git clone https://github.com/kimkim19642004/po2bats-autotools.git
 $ cd po2bats-autotools
 
-(The following is required only after the initial 'git clone'.)
-(Match the timestamps of the following files with the rules described in 'Makefile'.)
+## The following is required only after the initial 'git clone'.
+## Match the timestamps of the following files with the rules described in 'Makefile'.
 $ touch aclocal.m4
 $ touch configure
 $ touch Makefile.am
@@ -143,7 +163,7 @@ $ ./configure && make
 $ sudo make install
 ```
 
-**Full installation procedure** for this software is as follows:
+**Full installation procedure** for this software (If you need to rebuild this software) is as follows:
 ```
 $ cd $HOME
 $ git clone https://github.com/kimkim19642004/po2bats-autotools.git
@@ -162,8 +182,8 @@ $ make installcheck
 Note:
 - You can generate source files with 100% code coverage by executing the command **'./configure --enable-code-coverage --enable-testcode'**.
 - Open the file '$HOME/po2bats-autotools/tests/coverage/index.html' in your web browser and see the code coverage.
-- See **'NEWS'** for installation on other operating systems.
-- Please read **'INSTALL'** carefully.
+- See [NEWS](https://github.com/kimkim19642004/po2bats-autotools/blob/master/NEWS) for installation on other operating systems.
+- Please read [INSTALL](https://github.com/kimkim19642004/po2bats-autotools/blob/master/INSTALL) carefully.
 
 ## Support Eclipse
 
@@ -185,13 +205,14 @@ See [Change Logs](https://www.gnu.org/prep/standards/html_node/Change-Logs.html)
 
 ## Authors
 
-See 'AUTHORS' for more information.
+See [AUTHORS](https://github.com/kimkim19642004/po2bats-autotools/blob/master/AUTHORS) for more information.
 
 ## License
 
-See 'COPYING' for more information.
+See [COPYING](https://github.com/kimkim19642004/po2bats-autotools/blob/master/COPYING) for more information.
 
 ## NEWS
 
 This is a document showing the latest operation confirmation situation etc.
-See 'NEWS' for more information.
+
+See [NEWS](https://github.com/kimkim19642004/po2bats-autotools/blob/master/NEWS) for more information.
