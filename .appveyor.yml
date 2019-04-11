@@ -1,0 +1,76 @@
+## Note:
+## - See [Welcome to AppVeyor](https://www.appveyor.com/docs/ for this file).
+## - This file can be validated with [Validate YAML configuration](https://ci.appveyor.com/tools/validate-yaml).
+
+branches:
+  only:
+    - master
+
+## Testing environment
+## Ubuntu 18.04 LTS (Bionic Beaver)
+## Full sudo access to VM running build
+image: ubuntu1804
+
+## Note: Maintain compatibility with [Travis CI](https://travis-ci.com/)
+environment:
+  TRAVIS_OS_NAME: linux
+
+  matrix:
+    - LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      REBUILD_INSTALLER: on
+      CC: gcc
+      CXX: g++
+
+    - LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      REBUILD_INSTALLER: off
+      CC: gcc
+      CXX: g++
+
+    - LANG: ja_JP.UTF-8
+      LANGUAGE: ja_JP.UTF-8
+      REBUILD_INSTALLER: on
+      CC: gcc
+      CXX: g++
+
+    - LANG: ja_JP.UTF-8
+      LANGUAGE: ja_JP.UTF-8
+      REBUILD_INSTALLER: off
+      CC: gcc
+      CXX: g++
+
+    - LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      REBUILD_INSTALLER: on
+      CC: clang
+      CXX: clang++
+
+    - LANG: en_US.UTF-8
+      LANGUAGE: en_US.UTF-8
+      REBUILD_INSTALLER: off
+      CC: clang
+      CXX: clang++
+
+    - LANG: ja_JP.UTF-8
+      LANGUAGE: ja_JP.UTF-8
+      REBUILD_INSTALLER: on
+      CC: clang
+      CXX: clang++
+
+    - LANG: ja_JP.UTF-8
+      LANGUAGE: ja_JP.UTF-8
+      REBUILD_INSTALLER: off
+      CC: clang
+      CXX: clang++
+
+install: ./install_script.sh
+build_script: ./build_script.sh
+test: off
+
+notifications:
+  - provider: Email
+    to:
+      - kimkim19642004@yahoo.co.jp
+    on_build_success: false
+

@@ -48,6 +48,7 @@ m4_include([test_32.at])
 m4_include([test_33.at])
 m4_include([test_34.at])
 m4_include([test_35.at])
+m4_include([test_36.at])
 
 @CODE_COVERAGE_ENABLED_TRUE@AT_BANNER([Code Coverage])
 @CODE_COVERAGE_ENABLED_TRUE@m4_include([mk_coverage.at])
