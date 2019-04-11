@@ -4,9 +4,9 @@ dnl ### Settings for Configure ###
 AC_PREREQ([2.59])
 dnl ## Sepecify revision no.
 AC_REVISION([$Revision: 0.1.0 $])
-AC_COPYRIGHT([Copyright (c) 2018-2019 kim])
+AC_COPYRIGHT([Copyright (c) 2018-2020 kim])
 dnl ## Sepecify version no.
-AC_INIT([po2bats], [0.2.0],
+AC_INIT([po2bats], [0.3.0],
 	[https://github.com/kimkim19642004/po2bats-autotools/issues],,
 	[https://github.com/kimkim19642004/po2bats-autotools])
 
@@ -103,6 +103,9 @@ VAR_FLAG='no'; AC_PATH_PROGS_FEATURE_CHECK([MV_FEATURE], [mv gmv], [
 	VAR_FLAG='yes'
 ], [AC_MSG_FAILURE([mv: This GNU command is not installed[,] or invalid path/link settings.])])
 
+dnl ## Searches for a GNU version of 'make'.
+AX_CHECK_GNU_MAKE(, [AC_MSG_FAILURE([Package 'GNU Make' not installed, or invalid path/link settings. See <https://www.gnu.org/software/make/>.])])
+
 dnl ### Settings for Code coverage ###
 AX_CODE_COVERAGE
 AC_ARG_ENABLE([testcode],
@@ -110,7 +113,7 @@ AC_ARG_ENABLE([testcode],
 	[AC_SUBST([ENABLE_TESTCODE_TRUE])], [AC_SUBST([ENABLE_TESTCODE_TRUE], [@%:@])])
 dnl ## Note: Coped with the case where '/usr/local/bin' is not included in the root user's PATH.
 AS_IF([test "${enable_code_coverage}" = 'yes'], [
-	VAR_NAME='kcov'; AC_PATH_PROG([VAR_KCOV], [${VAR_NAME}], [no], [/usr/local/bin$PATH_SEPARATOR$PATH])
+	VAR_NAME='kcov'; AC_PATH_PROG([VAR_KCOV], [${VAR_NAME}], [no])
 	AS_IF([test "x${VAR_KCOV}" = 'xno'], [AC_MSG_FAILURE([${VAR_NAME}: command not found. Package '${VAR_NAME}' not installed, or invalid path/link settings. See <https://github.com/SimonKagstrom/kcov/>.])])
 ])
 
@@ -132,6 +135,7 @@ AC_CONFIG_FILES([Makefile src/Makefile po/Makefile.in tests/atlocal tests/testsu
 	tests/test_21.at tests/test_22.at tests/test_23.at tests/test_24.at tests/test_25.at
 	tests/test_26.at tests/test_27.at tests/test_28.at tests/test_29.at tests/test_30.at
 	tests/test_31.at tests/test_32.at tests/test_33.at tests/test_34.at tests/test_35.at
+	tests/test_36.at
 ])
 dnl ## File composition required for CI (Continuous Integration) using GitHub:
 dnl ## In order to accurately measure the coverage, it is necessary to match the contents of 'src/po2bats.sh' and 'tests/po2bats.sh'.

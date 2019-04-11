@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a testsuite script.
 
 dnl ### Initialization ###
 AT_INIT
-AT_COPYRIGHT([Copyright (c) 2018-2019 kim])
+AT_COPYRIGHT([Copyright (c) 2018-2020 kim])
 AT_COLOR_TESTS
 dnl # Note: List the commands for which you want to check the version.
 dnl # The command 'which' has no option for displaying the version.
@@ -48,6 +48,7 @@ m4_include([test_32.at])
 m4_include([test_33.at])
 m4_include([test_34.at])
 m4_include([test_35.at])
+m4_include([test_36.at])
 
 @CODE_COVERAGE_ENABLED_TRUE@AT_BANNER([Code Coverage])
 @CODE_COVERAGE_ENABLED_TRUE@m4_include([mk_coverage.at])

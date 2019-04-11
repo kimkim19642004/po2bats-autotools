@@ -7,7 +7,7 @@ m4_define([__commands__], [po2bats.sh --version])
 AT_CHECK([__commands__],,
 [Name: po2bats.sh
 Package: AT_PACKAGE_STRING
-Copyright: Copyright (c) 2018-2019 kim
+Copyright: Copyright (c) 2018-2020 kim
 License:
   SPDX-License-Identifier: MIT
   SPDX-License-List: https://spdx.org/licenses/MIT.html
@@ -15,7 +15,7 @@ Supported shells:
   GNU Bash 4.0 or higher: https://www.gnu.org/software/bash/
 ])
 
-m4_define([__kcov__], [kcov --bash-parser="@S|@(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern='po2bats.sh' --exclude-pattern='po2bats.sh.in' "@S|@{abs_builddir}/coverage"])
+m4_define([__kcov__], [kcov --bash-parser="$(which bash)" --bash-dont-parse-binary-dir --collect-only --include-pattern='po2bats.sh' --exclude-pattern='po2bats.sh.in' "${abs_builddir}/coverage"])
 AT_CHECK([__kcov__ __commands__],, [ignore])
 
 AT_CLEANUP

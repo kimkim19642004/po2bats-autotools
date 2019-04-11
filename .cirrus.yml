@@ -1,0 +1,23 @@
+## Note:
+## - See [Cirrus CI Documentation](https://cirrus-ci.org/).
+## - This file can be validated with [onlineyamltools](https://onlineyamltools.com/validate-yaml).
+
+## macOS 10.15, Xcode 12.0 (macOS Catalina)
+
+build_task:
+  only_if: $CIRRUS_BRANCH == 'master'
+
+  matrix:
+    - osx_instance: 
+        image: catalina-xcode
+      env:
+        TRAVIS_OS_NAME: osx
+
+    - freebsd_instance:
+        image_family: freebsd-12-1
+      env:
+        TRAVIS_OS_NAME: BSD
+
+  install_script:
+    - whoami
+    - groups

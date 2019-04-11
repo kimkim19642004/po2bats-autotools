@@ -1,4 +1,19 @@
-2019-04-10  kim  <kimkim19642004@yahoo.co.jp>
+2020-10-03  kim  <kimkim19642004@yahoo.co.jp>
+
+	* ja.po: Update file.
+		- Conducted code review.
+
+	* Makevars: Update file.
+		- Conducted code review.
+
+	* po2bats.pot: Update file.
+		- Conducted code review.
+
+2019-06-18  kim  <kimkim19642004@yahoo.co.jp>
+	* Makevars: Update file.
+		- Changed notation of version: from '0.2.0' to '0.2.2'.
+
+2019-06-02  kim  <kimkim19642004@yahoo.co.jp>
 	* ja.po: Update file.
 		- Changed notation of version: from '0.1.1' to '0.2.0'.
 		- Added translated messages corresponding to the following msids:

@@ -1,4 +1,28 @@
-2019-04-11  kim  <kimkim19642004@yahoo.co.jp>
+2020-10-03  kim  <kimkim19642004@yahoo.co.jp>
+
+	* configure.ac: Update file.
+		- Conducted code review.
+
+	* COPYING: Update file.
+		- Conducted code review.
+
+	* NEWS: Update file.
+		- Conducted code review.
+
+	* README: Update file.
+		- Conducted code review.
+
+2019-06-18  kim  <kimkim19642004@yahoo.co.jp>
+	* configure.ac: Update file.
+		- Changed notation of version: from '0.2.0' to '0.2.2'.
+		- Changed notation of revision: from '0.1.0' to '0.1.0'.
+		- Added 'test_36.at' to AC_CONFIG_FILES.
+	* Makefile.am: Update file.
+		- Added 'test_36.at' to EXTRA_DIST.
+	* NEWS: Update file.
+		- I retested this software.
+
+2019-06-02  kim  <kimkim19642004@yahoo.co.jp>
 	* configure.ac: Update file.
 		- Changed notation of version: from '0.1.1' to '0.2.0'.
 		- Changed notation of revision: from '0.1.2' to '0.1.0'.
@@ -36,12 +60,12 @@
 		- Add 'test_31.at' to 'EXTRA_DIST'.
 		- Add 'test_32.at' to 'EXTRA_DIST'.
 		- Add 'test_33.at' to 'EXTRA_DIST'.
-		- Fixed some code to support GhostBSD.
+		- Conducted code review.
 	* NEWS: Update file.
 		- Project update announcement
 		- Add to Tested platforms:
 			- [openSUSE](https://www.opensuse.org/)
-			- [GhostBSD](https://ghostbsd.org/)
+			- [FreeBSD](https://www.freebsd.org/)
 			- [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about)
 	* README: Update file.
 		- Fixed the execution result example of './ja.bats'.
