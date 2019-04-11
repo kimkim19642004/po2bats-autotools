@@ -48,6 +48,7 @@ m4_include([test_32.at])
 m4_include([test_33.at])
 m4_include([test_34.at])
 m4_include([test_35.at])
+m4_include([test_36.at])
 
 AT_BANNER([Code Coverage])
 m4_include([mk_coverage.at])

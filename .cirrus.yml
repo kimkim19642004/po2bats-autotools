@@ -1,0 +1,72 @@
+## Note:
+## - See [Cirrus CI Documentation](https://cirrus-ci.org/).
+## - This file can be validated with [onlineyamltools](https://onlineyamltools.com/validate-yaml).
+
+freebsd_build_task:
+  only_if: $CIRRUS_BRANCH == 'master'
+
+## Testing environment
+## FreeBSD 11.2-RELEASE
+## FreeBSD 12.0-RELEASE
+## Full sudo access to VM running build
+  freebsd_instance:
+    matrix:
+      - image: freebsd-11-2-release-amd64
+      - image: freebsd-12-0-release-amd64
+
+## Note: Maintain compatibility with [Travis CI](https://travis-ci.com/)
+  environment:
+    TRAVIS_OS_NAME: BSD
+
+    matrix:
+      - LANG: en_US.UTF-8
+        CC: gcc
+        CXX: g++
+        REBUILD_INSTALLER: on
+
+      - LANG: en_US.UTF-8
+        CC: gcc
+        CXX: g++
+        REBUILD_INSTALLER: off
+
+      - LANG: ja_JP.UTF-8
+        CC: gcc
+        CXX: g++
+        REBUILD_INSTALLER: on
+
+      - LANG: ja_JP.UTF-8
+        CC: gcc
+        CXX: g++
+        REBUILD_INSTALLER: off
+
+      - LANG: en_US.UTF-8
+        CC: clang
+        CXX: clang++
+        REBUILD_INSTALLER: on
+
+      - LANG: en_US.UTF-8
+        CC: clang
+        CXX: clang++
+        REBUILD_INSTALLER: off
+
+      - LANG: ja_JP.UTF-8
+        CC: clang
+        CXX: clang++
+        REBUILD_INSTALLER: on
+
+      - LANG: ja_JP.UTF-8
+        CC: clang
+        CXX: clang++
+        REBUILD_INSTALLER: off
+
+  install_script:
+    - pkg install -y bash
+    - ./install_script.sh
+  root_build_script:
+    - ./build_script.sh
+  non_root_build_script:
+    - sed -i '' -e '/%wheel ALL=(ALL) ALL/s/^# //' /usr/local/etc/sudoers
+    - pw groupadd users
+    - pw useradd test -g users -G wheel -w none -m
+    - su test -c 'cd /usr/home/test; git clone https://github.com/kimkim19642004/po2bats-autotools.git; cd po2bats-autotools; ./build_script.sh'
+

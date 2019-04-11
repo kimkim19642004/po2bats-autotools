@@ -1,4 +1,10 @@
-2019-04-10  kim  <kimkim19642004@yahoo.co.jp>
+2019-06-12  kim  <kimkim19642004@yahoo.co.jp>
+
+	* po2bats.sh.in: Update file.
+		- Duplicate specification prevention of option '--msgdir'.
+		- Conducted code review.
+
+2019-05-26  kim  <kimkim19642004@yahoo.co.jp>
 
 	* po2bats.sh.in: Update file.
 		- Clarified [GNU Bash 4.0 or higher](https://www.gnu.org/software/bash/) support.
